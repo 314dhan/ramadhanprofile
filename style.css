@@ -1,0 +1,52 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.typewriter-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: orange;
+    }
+}
+
+/* Tambahkan padding atau margin untuk menyisipkan ruang di bawah elemen "Personal Website" */
+#intro {
+    padding-top: 100px;
+    /* Sesuaikan sesuai kebutuhan Anda */
+}
+
+.footer {
+    background-color: #000000;
+    /* Ubah warna latar belakang sesuai kebutuhan */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-top-left-radius: 20px;
+    /* Menambahkan border-radius di bagian atas kiri */
+    border-top-right-radius: 20px;
+    /* Menambahkan border-radius di bagian atas kanan */
+}
