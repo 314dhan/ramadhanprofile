@@ -1,14 +1,36 @@
 /* BODY */
+
 body {
     background-color: #f8f9fa;
 }
 
+/* NAVBAR */
 .navbar{
     background-color: #000000;
 }
 
-#intro{
-    margin-top: 70px;
+.navbar ul li a {
+    display: inline-block;
+    position: relative;
+    color: #0087ca;
+}
+
+.navbar ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.navbar ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 /* CONTENT */
@@ -42,8 +64,12 @@ body {
     }
 }
 
+#intro {
+    margin-top: 70px;
+}
 
 /* FOOTER */
+
 .footer {
     background-color: #000000;
     color: #fff;
