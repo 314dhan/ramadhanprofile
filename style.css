@@ -33,6 +33,15 @@ body {
     transform-origin: bottom left;
 }
 
+.navbar-nav {
+    background-color: #000000;
+    border-radius: 0 0 20px 20px;
+}
+
+.navbar-nav .nav-item {
+    text-align: center;
+}
+
 /* CONTENT */
 
 .typewriter-text {
@@ -40,7 +49,6 @@ body {
     overflow: hidden;
     white-space: nowrap;
     margin: 0 auto;
-    letter-spacing: .15em;
     animation: typing 3.5s steps(40, end);
 }
 
@@ -77,4 +85,31 @@ body {
     text-align: center;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+}
+
+
+/* MOBILE VIEW */
+
+@media (max-width: 992px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 50px;
+        right: -100%;
+        width: 100%;
+        transition: right 0.3s ease;
+        z-index: 1040;
+    }
+
+    .navbar-collapse.show {
+        right: 0;
+    }
+
+    .navbar-toggler {
+        order: 1;
+    }
+
+    .navbar-nav .nav-item {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 }
