@@ -42,6 +42,38 @@ body {
     text-align: center;
 }
 
+.navbar-toggler .navbar-toggler-icon {
+    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+    transform: rotate(90deg);
+    border-radius: 50%;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon {
+    background-color: #565151;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    transform: rotate(0deg);
+}
+
+.navbar-toggler.collapsed .navbar-toggler-icon {
+    transform: rotate(90deg);
+}
+
+.rotate-icon {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+.navbar-toggler .navbar-toggler-icon::before,
+.navbar-toggler .navbar-toggler-icon::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 4px auto;
+}
+
 /* CONTENT */
 
 .typewriter-text {
