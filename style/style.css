@@ -1,7 +1,7 @@
 /* BODY */
 
 body {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 /* NAVBAR */
@@ -106,6 +106,10 @@ body {
 
 #intro {
     margin-top: 70px;
+}
+
+img{
+    width: 450px;
 }
 
 /* FOOTER */
