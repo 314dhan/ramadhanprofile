@@ -4,186 +4,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Ramadhan</title>
+    <title>Ramadhan - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
 </head>
-<body>
 
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Ramadhan</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">Ramadhan<span>.</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#about">About</a>
+                        <a class="nav-link" href="#intro">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#tech-stack">Tech Stack</a>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#projects">Projects</a>
+                        <a class="nav-link" href="#tech-stack">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container">
-        <section id="intro">
-            <h1 class="typewriter-text">Personal Website...<span class="blink">|</span></h1>
-        </section>
-    </div>
-
-    <div class="container">
-        <section id="about">
-            <h2>ABOUT ME</h2>
-            <p>My name is Ramadhan, a student of Computer Science who is eager to learn. I have a keen interest and
-                proficiency in the field of backend programming. I enjoy learning new technologies and exploring various
-                programming concepts. With dedication and a high spirit of learning, I am determined to continuously
-                develop myself and achieve my career goals in the field of information technology.
-            </p>
-            <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank">Contact Me</a>
-        </section>
-
-        <hr>
-
-        <section id="tech-stack">
-            <h2>TECH STACK</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline">
-                        <li><i class="fab fa-bootstrap"></i> Bootstrap</li>
-                        <li><i class="fab fa-php"></i> PHP</li>
-                        <li><i class="fab fa-html5"></i> HTML</li>
-                        <li><i class="fab fa-css3-alt"></i> CSS</li>
-                        <li><i class="fab fa-js"></i> JavaScript</li>
-                        <li><i class="fab fa-laravel"></i> Laravel</li>
-                        <li><i class="fab fa-python"></i> Python</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="list-inline">
-                        <li><i class="fab fa-java"></i> Java</li>
-                        <li><i class="fas fa-code"></i> CodeIgniter</li>
-                        <li><i class="fab fa-node-js"></i> Node.js</li>
-                        <li><i class="fab fa-react"></i> React</li>
-                        <li><i class="fas fa-code-branch"></i> Git</li>
-                        <li><i class="fas fa-database"></i> MySQL</li>
-                        <li><i class="fas fa-database"></i> PostgreSQL</li>
-                    </ul>
-                </div>
+    <!-- Hero Section -->
+    <section id="intro">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1 class="typewriter-text">Hello, I'm Ramadhan</h1>
+            <p class="hero-subtitle">Backend Developer & Computer Science Student</p>
+            <div class="mt-4">
+                <a href="#about" class="btn btn-primary mr-3">Explore More</a>
+                <a href="#contact" class="btn btn-outline-light">Contact Me</a>
             </div>
-        </section>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
 
-        <hr>
-
-        <section id="projects">
-            <h2>PROJECTS</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Interactive E-Survey System with Dashboard</h3>
-                    <ul>
-                        <li>This project implements an online survey system using PHP, JavaScript, and MySQL technology.</li>
-                        <li>Utilizing dynamic survey forms, users can provide responses, and the system not only collects data but also
-                            calculates the number of respondents for each answer option.</li>
-                        <li>Survey results are presented clearly through interactive graphs using Chart.js, providing a comprehensive
-                            analysis experience.</li>
-                    </ul>
-                    <a href="https://github.com/314dhan/e-survey" class="btn btn-primary" target="_blank">View Project</a>
-                    <hr>
-                    <h3>Travel Logging Application with Interactive World Map</h3>
-                    <ul>
-                        <li>This project is a travel tracking application built with Node.js, Axios, HTML EJS, CSS, Express, and PostgreSQL
-                            technologies.</li>
-                        <li>The application enables users to log the names of countries they already visited.</li>
-                        <li>By integrating this external data with internal information stored in a PostgreSQL database, we facilitate
-                            engaging interactions on the world map.</li>
-                    </ul>
-                    <a href="https://github.com/314dhan/travel-tracker" class="btn btn-primary" target="_blank">View Project</a>
-                    <hr>
-                    <h3>Naming Band Generator</h3>
-                    <img src="images/namingband.png" alt="">
-                    <ul>
-                        <li>This JavaScript project is a fun tool designed to generate unique and creative names for bands.</li>
-                        <li>Using JavaScript, the generator combines various words, phrases, or themes to create catchy and memorable band
-                            names.</li>
-                        <li>With its simple and intuitive interface, the Naming Band Generator provides endless possibilities for band name
-                            ideas.
-                        </li>
-                    </ul>
-                    <a href="https://314dhan.github.io/namingbandgenerators/" target="_blank" class="btn btn-primary">View Project</a>
-                    <hr>
-                    <h3>Tinpets</h3>
-                    <img src="images/tinpets.png" alt="tinpets">
-                    <ul>
-                        <br>
-                        <li>Utilizes HTML for the structure and content of the web page.</li>
-                        <li>Leverages CSS for attractive design and layout.</li>
-                        <li>A platform to find animal companions for your beloved pets.</li>
-                        <li>A friendly community for pet lovers.</li>
-                    </ul>
-                    <a href="https://314dhan.github.io/tinpets/" target="_blank" class="btn btn-primary">View Project</a>
-                </div>
-                <div class="col-md-6">
-                    <h3>News Management Project Portfolio with PHP</h3>
-                    <img src="images/news_web.png" alt="tinptes">
-                    <ul>
-                        <br>
-                        <li>This PHP project was developed to manage news with key features such as categorization, user access
-                            control, authorization, news search, and news creation and deletion.</li>
-                    </ul>
-                    <a href="https://github.com/314dhan/News-Web-App" target="_blank" class="btn btn-primary">View Project</a>
-                    <hr>
-                    <h3>Stopwatch counter using react</h3>
-                    <ul>
-                        <li>Create a website using react to create responsive web stopwatch to countdown the time and using the
-                            sound when the times up</li>
-                    </ul>
-                    <div>
-                        <h3>Calculator Project</h3>
-                        <img src="images/calculator.png" alt="calculator">
-                        <ul>
-                            <li>Developed using HTML, CSS (Bootstrap), and JavaScript.</li>
-                            <li>Features a fully functional calculator with keyboard support and on-screen buttons.</li>
-                            <li>Demonstrates proficiency in front-end technologies such as HTML, CSS, and JavaScript.</li>
-                            <li>Utilizes Bootstrap framework for responsive design.</li>
-                        </ul>
-                        <a href="https://314dhan.github.io/calc/" target="_blank" class="btn btn-primary">View Project</a>
-                        <hr>
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>About Me</h2>
+                    <p>My name is Ramadhan, a Computer Science student with a passion for backend development. I'm
+                        constantly eager to learn and explore new technologies in the programming world.</p>
+                    <p>I specialize in creating robust server-side applications and enjoy solving complex problems. My
+                        journey in technology is driven by curiosity and a desire to build efficient, scalable systems.
+                    </p>
+                    <p>When I'm not coding, you can find me exploring new frameworks, contributing to open-source
+                        projects, or sharing knowledge with fellow developers.</p>
+                    <div class="mt-4">
+                        <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank"
+                            class="btn btn-primary mr-3">
+                            <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/314dhan" target="_blank" class="btn btn-dark">
+                            <i class="fab fa-github mr-2"></i> GitHub
+                        </a>
                     </div>
-
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                        alt="About Me" class="img-fluid about-img floating">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <hr>
-    </div>
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="fade-in">
+        <div class="container">
+            <h2 class="text-center">My Skills</h2>
+            <p class="text-center mb-5">Here are the technologies I work with</p>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fab fa-php tech-icon"></i>
+                        <h4>PHP</h4>
+                        <p>Building robust backend systems and web applications with PHP frameworks like Laravel and
+                            CodeIgniter.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fab fa-laravel tech-icon"></i>
+                        <h4>Laravel</h4>
+                        <p>Developing modern web applications with Laravel's elegant syntax and powerful features.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fab fa-node-js tech-icon"></i>
+                        <h4>Node.js</h4>
+                        <p>Creating scalable server-side applications using JavaScript runtime environment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fas fa-database tech-icon"></i>
+                        <h4>Databases</h4>
+                        <p>Working with MySQL, PostgreSQL to design efficient database structures and queries.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fab fa-js tech-icon"></i>
+                        <h4>JavaScript</h4>
+                        <p>Building interactive front-end experiences and full-stack applications.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tech-item">
+                        <i class="fab fa-python tech-icon"></i>
+                        <h4>Python</h4>
+                        <p>Developing scripts, automation tools, and backend services with Python.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2 class="text-center">My Projects</h2>
+            <p class="text-center mb-5">Some of my recent work</p>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top project-img" alt="E-Survey System">
+                        <div class="card-body">
+                            <h5 class="card-title">Interactive E-Survey System</h5>
+                            <p class="card-text">An online survey system with dynamic forms and real-time analytics
+                                dashboard.</p>
+                            <div class="mb-3">
+                                <span class="badge badge-tech">PHP</span>
+                                <span class="badge badge-tech">JavaScript</span>
+                                <span class="badge badge-tech">MySQL</span>
+                                <span class="badge badge-tech">Chart.js</span>
+                            </div>
+                            <a href="https://github.com/314dhan/e-survey" class="btn btn-primary" target="_blank">View
+                                Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top project-img" alt="Travel Tracker">
+                        <div class="card-body">
+                            <h5 class="card-title">Travel Logging Application</h5>
+                            <p class="card-text">A travel tracker with interactive world map to log visited countries.
+                            </p>
+                            <div class="mb-3">
+                                <span class="badge badge-tech">Node.js</span>
+                                <span class="badge badge-tech">Express</span>
+                                <span class="badge badge-tech">PostgreSQL</span>
+                                <span class="badge badge-tech">EJS</span>
+                            </div>
+                            <a href="https://github.com/314dhan/travel-tracker" class="btn btn-primary"
+                                target="_blank">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top project-img" alt="News Management">
+                        <div class="card-body">
+                            <h5 class="card-title">News Management System</h5>
+                            <p class="card-text">A PHP-based news portal with categorization, user access control and
+                                search functionality.</p>
+                            <div class="mb-3">
+                                <span class="badge badge-tech">PHP</span>
+                                <span class="badge badge-tech">MySQL</span>
+                                <span class="badge badge-tech">Bootstrap</span>
+                            </div>
+                            <a href="https://github.com/314dhan/News-Web-App" class="btn btn-primary"
+                                target="_blank">View Project</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                            class="card-img-top project-img" alt="Tinpets">
+                        <div class="card-body">
+                            <h5 class="card-title">Tinpets</h5>
+                            <p class="card-text">A platform to find animal companions for your pets with a friendly
+                                community.</p>
+                            <div class="mb-3">
+                                <span class="badge badge-tech">HTML</span>
+                                <span class="badge badge-tech">CSS</span>
+                                <span class="badge badge-tech">JavaScript</span>
+                            </div>
+                            <a href="https://314dhan.github.io/tinpets/" class="btn btn-primary" target="_blank">View
+                                Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2 class="text-center">Get In Touch</h2>
+            <p class="text-center mb-5">Feel free to reach out for collaborations or just a friendly hello</p>
+
+            <!-- <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Your Message"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row mt-5">
+                <div class="col-md-4 text-center">
+                    <div class="contact-info">
+                        <i class="fas fa-envelope fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Email</h5>
+                        <p>ramadhan25321@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="contact-info">
+                        <i class="fas fa-phone fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Phone</h5>
+                        <p>+62 895 0170 0818</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt fa-2x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Location</h5>
+                        <p>Indonesia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm">
-                    <h3>Social Media</h3>
-                    <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" class="text-white mr-3" target="_blank"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://wa.me/6289501700818" class="text-white" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <br>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3>Ramadhan</h3>
+                    <p>A backend developer passionate about building efficient systems and solving complex problems.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#intro" class="text-white">Home</a></li>
+                        <li><a href="#about" class="text-white">About</a></li>
+                        <li><a href="#tech-stack" class="text-white">Skills</a></li>
+                        <li><a href="#projects" class="text-white">Projects</a></li>
+                        <li><a href="#contact" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/314dhan" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://wa.me/6289501700818" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:ramadhan@example.com"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
             </div>
-            <span class="text-white mr-3">Copyright 2024. All rights reserved.</span>
+            <div class="footer-bottom text-center mt-5">
+                <p class="mb-0">&copy; 2024 Ramadhan. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 
