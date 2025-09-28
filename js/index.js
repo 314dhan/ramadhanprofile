@@ -212,3 +212,36 @@
                 }
             }, 100);
         });
+
+// Language switcher
+const setLanguage = (language) => {
+    document.documentElement.lang = language;
+    localStorage.setItem('language', language);
+
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[language] && translations[language][key]) {
+            element.innerHTML = translations[language][key];
+        }
+    });
+
+    // Update dropdown button text
+    const dropdownButton = document.getElementById('languageDropdown');
+    const selectedOption = document.querySelector(`.dropdown-item[data-lang='${language}']`);
+    if (dropdownButton && selectedOption) {
+        dropdownButton.innerHTML = selectedOption.innerHTML;
+    }
+};
+
+const languageDropdownItems = document.querySelectorAll('.dropdown-item[data-lang]');
+languageDropdownItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = item.getAttribute('data-lang');
+        setLanguage(lang);
+    });
+});
+
+// Set initial language
+const initialLanguage = localStorage.getItem('language') || 'en';
+setLanguage(initialLanguage);

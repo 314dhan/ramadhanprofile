@@ -580,3 +580,20 @@ h2::after {
     width: 0%;
     transition: width 0.1s ease;
 }
+
+/* Language Switcher */
+.language-switcher {
+    margin-left: 15px;
+}
+
+.language-switcher .dropdown-menu {
+    background-color: var(--dark-color);
+}
+
+.language-switcher .dropdown-item {
+    color: white;
+}
+
+.language-switcher .dropdown-item:hover {
+    background-color: var(--primary-color);
+}

@@ -29,21 +29,31 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#intro">Home</a>
+                        <a class="nav-link" href="#intro" data-key="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#about" data-key="about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#tech-stack">Skills</a>
+                        <a class="nav-link" href="#tech-stack" data-key="skills">Skills</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
+                        <a class="nav-link" href="#projects" data-key="projects">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact" data-key="contact">Contact</a>
                     </li>
                 </ul>
+                <div class="dropdown language-switcher">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EN 🇬🇧
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <a class="dropdown-item" href="#" data-lang="en">EN 🇬🇧</a>
+                        <a class="dropdown-item" href="#" data-lang="id">ID 🇮🇩</a>
+                        <a class="dropdown-item" href="#" data-lang="ja">JP 🇯🇵</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -52,11 +62,11 @@
     <section id="intro">
         <div id="particles-js"></div>
         <div class="hero-content">
-            <h1 class="typewriter-text">Hello, I'm Ramadhan</h1>
-            <p class="hero-subtitle">FullStack Engineer</p>
+            <h1 class="typewriter-text" data-key="hero_title">Hello, I'm Ramadhan</h1>
+            <p class="hero-subtitle" data-key="hero_subtitle">FullStack Engineer</p>
             <div class="mt-4">
-                <a href="#about" class="btn btn-primary mr-3">Explore More</a>
-                <a href="#contact" class="btn btn-outline-light">Contact Me</a>
+                <a href="#about" class="btn btn-primary mr-3" data-key="explore_more">Explore More</a>
+                <a href="#contact" class="btn btn-outline-light" data-key="contact_me">Contact Me</a>
             </div>
         </div>
         <a href="#about" class="scroll-down">
@@ -69,21 +79,21 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h2>About Me</h2>
-                    <p>My name is Ramadhan, a programmer who passion for backend development. I'm
+                    <h2 data-key="about_me_title">About Me</h2>
+                    <p data-key="about_me_p1">My name is Ramadhan, a programmer who passion for backend development. I'm
                         constantly eager to learn and explore new technologies in the programming world.</p>
-                    <p>I specialize in creating robust server-side applications and enjoy solving complex problems. My
+                    <p data-key="about_me_p2">I specialize in creating robust server-side applications and enjoy solving complex problems. My
                         journey in technology is driven by curiosity and a desire to build efficient, scalable systems.
                     </p>
-                    <p>When I'm not coding, you can find me exploring new frameworks, contributing to open-source
+                    <p data-key="about_me_p3">When I'm not coding, you can find me exploring new frameworks, contributing to open-source
                         projects, or sharing knowledge with fellow developers.</p>
                     <div class="mt-4">
                         <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank"
                             class="btn btn-primary mr-3">
-                            <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                            <i class="fab fa-linkedin mr-2"></i> <span data-key="linkedin">LinkedIn</span>
                         </a>
                         <a href="https://github.com/314dhan" target="_blank" class="btn btn-dark">
-                            <i class="fab fa-github mr-2"></i> GitHub
+                            <i class="fab fa-github mr-2"></i> <span data-key="github">GitHub</span>
                         </a>
                     </div>
                 </div>
@@ -98,30 +108,30 @@
     <!-- Tech Stack Section -->
     <section id="tech-stack" class="fade-in">
         <div class="container">
-            <h2 class="text-center">My Skills</h2>
-            <p class="text-center mb-5">Here are the technologies I work with</p>
+            <h2 class="text-center" data-key="my_skills_title">My Skills</h2>
+            <p class="text-center mb-5" data-key="my_skills_subtitle">Here are the technologies I work with</p>
 
             <div class="row">
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-php tech-icon"></i>
-                        <h4>PHP</h4>
-                        <p>Building robust backend systems and web applications with PHP frameworks like Laravel and
+                        <h4 data-key="php_skill">PHP</h4>
+                        <p data-key="php_skill_desc">Building robust backend systems and web applications with PHP frameworks like Laravel and
                             CodeIgniter.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-laravel tech-icon"></i>
-                        <h4>Laravel</h4>
-                        <p>Developing modern web applications with Laravel's elegant syntax and powerful features.</p>
+                        <h4 data-key="laravel_skill">Laravel</h4>
+                        <p data-key="laravel_skill_desc">Developing modern web applications with Laravel's elegant syntax and powerful features.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-node-js tech-icon"></i>
-                        <h4>Node.js</h4>
-                        <p>Creating scalable server-side applications using JavaScript runtime environment.</p>
+                        <h4 data-key="nodejs_skill">Node.js</h4>
+                        <p data-key="nodejs_skill_desc">Creating scalable server-side applications using JavaScript runtime environment.</p>
                     </div>
                 </div>
             </div>
@@ -130,22 +140,22 @@
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fas fa-database tech-icon"></i>
-                        <h4>Databases</h4>
-                        <p>Working with MySQL, PostgreSQL to design efficient database structures and queries.</p>
+                        <h4 data-key="db_skill">Databases</h4>
+                        <p data-key="db_skill_desc">Working with MySQL, PostgreSQL to design efficient database structures and queries.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-js tech-icon"></i>
-                        <h4>JavaScript</h4>
-                        <p>Building interactive front-end experiences and full-stack applications.</p>
+                        <h4 data-key="js_skill">JavaScript</h4>
+                        <p data-key="js_skill_desc">Building interactive front-end experiences and full-stack applications.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-python tech-icon"></i>
-                        <h4>Python</h4>
-                        <p>Developing scripts, automation tools, and backend services with Python.</p>
+                        <h4 data-key="python_skill">Python</h4>
+                        <p data-key="python_skill_desc">Developing scripts, automation tools, and backend services with Python.</p>
                     </div>
                 </div>
             </div>
@@ -154,22 +164,22 @@
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-java tech-icon"></i>
-                        <h4>Java</h4>
-                        <p>Building cross-platform applications and robust backend services with Java.</p>
+                        <h4 data-key="java_skill">Java</h4>
+                        <p data-key="java_skill_desc">Building cross-platform applications and robust backend services with Java.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fas fa-file-code tech-icon"></i>
-                        <h4>Lua</h4>
-                        <p>Scripting for game development and embedding in applications, especially with Roblox.</p>
+                        <h4 data-key="lua_skill">Lua</h4>
+                        <p data-key="lua_skill_desc">Scripting for game development and embedding in applications, especially with Roblox.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-react tech-icon"></i>
-                        <h4>React</h4>
-                        <p>Creating modern, dynamic single-page applications and user interfaces with React.</p>
+                        <h4 data-key="react_skill">React</h4>
+                        <p data-key="react_skill_desc">Creating modern, dynamic single-page applications and user interfaces with React.</p>
                     </div>
                 </div>
             </div>
@@ -178,15 +188,15 @@
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fab fa-vuejs tech-icon"></i>
-                        <h4>Vue.js</h4>
-                        <p>Developing progressive and incrementally adoptable user interfaces with Vue.js.</p>
+                        <h4 data-key="vuejs_skill">Vue.js</h4>
+                        <p data-key="vuejs_skill_desc">Developing progressive and incrementally adoptable user interfaces with Vue.js.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="tech-item">
                         <i class="fas fa-mobile-alt tech-icon"></i>
-                        <h4>Mobile Development</h4>
-                        <p>Building native or cross-platform mobile applications for Android and iOS.</p>
+                        <h4 data-key="mobile_skill">Mobile Development</h4>
+                        <p data-key="mobile_skill_desc">Building native or cross-platform mobile applications for Android and iOS.</p>
                     </div>
                 </div>
             </div>
@@ -196,8 +206,8 @@
     <!-- Projects Section -->
     <section id="projects" class="fade-in">
         <div class="container">
-            <h2 class="text-center">My Projects</h2>
-            <p class="text-center mb-5">Some of my recent work</p>
+            <h2 class="text-center" data-key="my_projects_title">My Projects</h2>
+            <p class="text-center mb-5" data-key="my_projects_subtitle">Some of my recent work</p>
 
             <div class="row">
                 <div class="col-lg-6">
@@ -205,8 +215,8 @@
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="E-Survey System">
                         <div class="card-body">
-                            <h5 class="card-title">Interactive E-Survey System</h5>
-                            <p class="card-text">An online survey system with dynamic forms and real-time analytics
+                            <h5 class="card-title" data-key="project1_title">Interactive E-Survey System</h5>
+                            <p class="card-text" data-key="project1_desc">An online survey system with dynamic forms and real-time analytics
                                 dashboard.</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">PHP</span>
@@ -214,7 +224,7 @@
                                 <span class="badge badge-tech">MySQL</span>
                                 <span class="badge badge-tech">Chart.js</span>
                             </div>
-                            <a href="https://github.com/314dhan/e-survey" class="btn btn-primary" target="_blank">View
+                            <a href="https://github.com/314dhan/e-survey" class="btn btn-primary" target="_blank" data-key="view_project">View
                                 Project</a>
                         </div>
                     </div>
@@ -225,8 +235,8 @@
                         <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="Travel Tracker">
                         <div class="card-body">
-                            <h5 class="card-title">Travel Logging Application</h5>
-                            <p class="card-text">A travel tracker with interactive world map to log visited countries.
+                            <h5 class="card-title" data-key="project2_title">Travel Logging Application</h5>
+                            <p class="card-text" data-key="project2_desc">A travel tracker with interactive world map to log visited countries.
                             </p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">Node.js</span>
@@ -235,7 +245,7 @@
                                 <span class="badge badge-tech">EJS</span>
                             </div>
                             <a href="https://github.com/314dhan/travel-tracker" class="btn btn-primary"
-                                target="_blank">View Project</a>
+                                target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -247,8 +257,8 @@
                         <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="News Management">
                         <div class="card-body">
-                            <h5 class="card-title">News Management System</h5>
-                            <p class="card-text">A PHP-based news portal with categorization, user access control and
+                            <h5 class="card-title" data-key="project3_title">News Management System</h5>
+                            <p class="card-text" data-key="project3_desc">A PHP-based news portal with categorization, user access control and
                                 search functionality.</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">PHP</span>
@@ -256,7 +266,7 @@
                                 <span class="badge badge-tech">Bootstrap</span>
                             </div>
                             <a href="https://github.com/314dhan/News-Web-App" class="btn btn-primary"
-                                target="_blank">View Project</a>
+                                target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -266,15 +276,15 @@
                         <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="Tinpets">
                         <div class="card-body">
-                            <h5 class="card-title">Tinpets</h5>
-                            <p class="card-text">A platform to find animal companions for your pets with a friendly
+                            <h5 class="card-title" data-key="project4_title">Tinpets</h5>
+                            <p class="card-text" data-key="project4_desc">A platform to find animal companions for your pets with a friendly
                                 community.</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">HTML</span>
                                 <span class="badge badge-tech">CSS</span>
                                 <span class="badge badge-tech">JavaScript</span>
                             </div>
-                            <a href="https://314dhan.github.io/tinpets/" class="btn btn-primary" target="_blank">View
+                            <a href="https://314dhan.github.io/tinpets/" class="btn btn-primary" target="_blank" data-key="view_project">View
                                 Project</a>
                         </div>
                     </div>
@@ -285,8 +295,8 @@
                         <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="URL Shortener">
                         <div class="card-body">
-                            <h5 class="card-title">URL Shortener</h5>
-                            <p class="card-text">A link shortener app with comprehensive analytics to track the performance of each link. Built using NodeJS with JSON as
+                            <h5 class="card-title" data-key="project5_title">URL Shortener</h5>
+                            <p class="card-text" data-key="project5_desc">A link shortener app with comprehensive analytics to track the performance of each link. Built using NodeJS with JSON as
                             its database.</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">HTML</span>
@@ -294,7 +304,7 @@
                                 <span class="badge badge-tech">JavaScript</span>
                                 <span class="badge badge-tech">NodeJS</span>
                             </div>
-                            <a href="https://github.com/314dhan/linkshortener" class="btn btn-primary" target="_blank">View Project</a>
+                            <a href="https://github.com/314dhan/linkshortener" class="btn btn-primary" target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -304,8 +314,8 @@
                         <img src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
                             class="card-img-top project-img" alt="Chat App Realtime">
                         <div class="card-body">
-                            <h5 class="card-title">Chat App Realtime</h5>
-                            <p class="card-text">A real-time chat application using NodeJS and Vue. This application uses JSON as its database.</p>
+                            <h5 class="card-title" data-key="project6_title">Chat App Realtime</h5>
+                            <p class="card-text" data-key="project6_desc">A real-time chat application using NodeJS and Vue. This application uses JSON as its database.</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">HTML</span>
                                 <span class="badge badge-tech">CSS</span>
@@ -313,7 +323,7 @@
                                 <span class="badge badge-tech">NodeJs</span>
                                 <span class="badge badge-tech">Vue</span>
                             </div>
-                            <a href="https://github.com/314dhan/chat-app-messaging" class="btn btn-primary" target="_blank">View Project</a>
+                            <a href="https://github.com/314dhan/chat-app-messaging" class="btn btn-primary" target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -324,8 +334,8 @@
     <!-- Game Projects Section -->
     <section id="game-projects" class="fade-in">
         <div class="container">
-            <h2 class="text-center">My Game Projects</h2>
-            <p class="text-center mb-5">A game I made for Roblox</p>
+            <h2 class="text-center" data-key="my_game_projects_title">My Game Projects</h2>
+            <p class="text-center mb-5" data-key="my_game_projects_subtitle">A game I made for Roblox</p>
 
             <div class="row">
                 <div class="col-lg-6">
@@ -333,13 +343,13 @@
                         <img src="images/roblox/lasbloxguys.png"
                             class="card-img-top project-img" alt="Roblox Game">
                         <div class="card-body">
-                            <h5 class="card-title">LastBlox Guys</h5>
-                            <p class="card-text">A game that you have to survie on the block target until the time is finish</p>
+                            <h5 class="card-title" data-key="game1_title">LastBlox Guys</h5>
+                            <p class="card-text" data-key="game1_desc">A game that you have to survie on the block target until the time is finish</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">Roblox Studio</span>
                                 <span class="badge badge-tech">Lua</span>
                             </div>
-                            <a href="https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Fgame_details%3FgameId%3D8734574120&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fgames%2F83595445760346" class="btn btn-primary" target="_blank">View Project</a>
+                            <a href="https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Fgame_details%3FgameId%3D8734574120&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fgames%2F83595445760346" class="btn btn-primary" target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -347,14 +357,13 @@
                     <div class="project-card">
                         <img src="images/roblox/bloptower.webp" class="card-img-top project-img" alt="Roblox Game">
                         <div class="card-body">
-                            <h5 class="card-title">BlobTower</h5>
-                            <p class="card-text">A Roblox tower game that you have to reach the top of the tower to win the game</p>
+                            <h5 class="card-title" data-key="game2_title">BlobTower</h5>
+                            <p class="card-text" data-key="game2_desc">A Roblox tower game that you have to reach the top of the tower to win the game</p>
                             <div class="mb-3">
                                 <span class="badge badge-tech">Roblox Studio</span>
                                 <span class="badge badge-tech">Lua</span>
                             </div>
-                            <a href="https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Fgame_details%3FgameId%3D8445961159&af_web_dp=https%3A%2F%2Fwww.roblox.com%2Fgames%2F136041774963699"
-                                class="btn btn-primary" target="_blank">View Project</a>
+                            <a href="https://ro.blox.com/Ebh5?af_dp=roblox%3A%2F%2Fnavigation%2Fgame_details%3FgameId%3D8445961159&af_web_dp=https..." class="btn btn-primary" target="_blank" data-key="view_project">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -365,8 +374,8 @@
     <!-- Contact Section -->
     <section id="contact" class="fade-in">
         <div class="container">
-            <h2 class="text-center">Get In Touch</h2>
-            <p class="text-center mb-5">Feel free to reach out for collaborations or just a friendly hello</p>
+            <h2 class="text-center" data-key="contact_title">Get In Touch</h2>
+            <p class="text-center mb-5" data-key="contact_subtitle">Feel free to reach out for collaborations or just a friendly hello</p>
 
             <!-- <div class="row">
                 <div class="col-lg-6 mx-auto">
@@ -395,22 +404,22 @@
                 <div class="col-md-4 text-center">
                     <div class="contact-info">
                         <i class="fas fa-envelope fa-2x mb-3" style="color: var(--primary-color);"></i>
-                        <h5>Email</h5>
+                        <h5 data-key="email">Email</h5>
                         <p>ramadhan25321@gmail.com</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="contact-info">
                         <i class="fas fa-phone fa-2x mb-3" style="color: var(--primary-color);"></i>
-                        <h5>Phone</h5>
+                        <h5 data-key="phone">Phone</h5>
                         <p>+62 895 0170 0818</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="contact-info">
                         <i class="fas fa-map-marker-alt fa-2x mb-3" style="color: var(--primary-color);"></i>
-                        <h5>Location</h5>
-                        <p>Indonesia</p>
+                        <h5 data-key="location">Location</h5>
+                        <p data-key="indonesia">Indonesia</p>
                     </div>
                 </div>
             </div>
@@ -423,20 +432,20 @@
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <h3>Ramadhan</h3>
-                    <p>A backend developer passionate about building efficient systems and solving complex problems.</p>
+                    <p data-key="footer_desc">A backend developer passionate about building efficient systems and solving complex problems.</p>
                 </div>
                 <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h3>Quick Links</h3>
+                    <h3 data-key="quick_links">Quick Links</h3>
                     <ul class="list-unstyled">
-                        <li><a href="#intro" class="text-white">Home</a></li>
-                        <li><a href="#about" class="text-white">About</a></li>
-                        <li><a href="#tech-stack" class="text-white">Skills</a></li>
-                        <li><a href="#projects" class="text-white">Projects</a></li>
-                        <li><a href="#contact" class="text-white">Contact</a></li>
+                        <li><a href="#intro" class="text-white" data-key="home">Home</a></li>
+                        <li><a href="#about" class="text-white" data-key="about">About</a></li>
+                        <li><a href="#tech-stack" class="text-white" data-key="skills">Skills</a></li>
+                        <li><a href="#projects" class="text-white" data-key="projects">Projects</a></li>
+                        <li><a href="#contact" class="text-white" data-key="contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <h3>Connect With Me</h3>
+                    <h3 data-key="connect_with_me">Connect With Me</h3>
                     <div class="social-icons">
                         <a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank"><i
                                 class="fab fa-linkedin"></i></a>
@@ -447,7 +456,7 @@
                 </div>
             </div>
             <div class="footer-bottom text-center mt-5">
-                <p class="mb-0">&copy; 2025 Ramadhan. All rights reserved.</p>
+                <p class="mb-0" data-key="copyright">&copy; 2025 Ramadhan. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -463,6 +472,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/index.js"></script>
 </body>
 
