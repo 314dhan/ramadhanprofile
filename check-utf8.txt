@@ -1,0 +1,102 @@
+﻿Loading svelte-check in workspace: e:\kuzon\webboot\backend\personal website
+Getting Svelte diagnostics...
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\stores\i18n.ts[39m:8:22
+[31mError[39m: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ en: { home: string; about: string; skills: string; projects: string; contact: string; hero_title: string; hero_subtitle: string; explore_more: string; contact_me: string; about_me_title: string; ... 67 more ...; copyright: string; }; id: { ...; }; ja: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ en: { home: string; about: string; skills: string; projects: string; contact: string; hero_title: string; hero_subtitle: string; explore_more: string; contact_me: string; about_me_title: string; ... 67 more ...; copyright: string; }; id: { ...; }; ja: { ...; }; }'. 
+[36m	const storedLocale = localStorage.getItem('language');
+	if (storedLocale && [35mtranslations[storedLocale][36m) {
+		locale.set(storedLocale);[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\stores\i18n.ts[39m:20:10
+[31mError[39m: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ en: { home: string; about: string; skills: string; projects: string; contact: string; hero_title: string; hero_subtitle: string; explore_more: string; contact_me: string; about_me_title: string; ... 67 more ...; copyright: string; }; id: { ...; }; ja: { ...; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ en: { home: string; about: string; skills: string; projects: string; contact: string; hero_title: string; hero_subtitle: string; explore_more: string; contact_me: string; about_me_title: string; ... 67 more ...; copyright: string; }; id: { ...; }; ja: { ...; }; }'. 
+[36m	return (key: string) => {
+		return [35mtranslations[$locale][36m?.[key] || key;
+	};[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Contact.svelte[39m:3:11
+[31mError[39m: Module '"./About.svelte"' has no exported member 'fadeInAction'. Did you mean to use 'import fadeInAction from "./About.svelte"' instead? (ts)
+[36m	import { t } from '$lib/stores/i18n';
+	import { [35mfadeInAction[36m } from './About.svelte';
+</script>[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Footer.svelte[39m:75:6
+[33mWarn[39m: Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label (svelte)
+[36m				<div class="social-icons">
+					[35m<a href="https://www.linkedin.com/in/ramadhan-50973b1aa/" target="_blank">
+						<i class="fab fa-linkedin"></i>
+					</a>[36m
+					<a href="https://github.com/314dhan" target="_blank">[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Footer.svelte[39m:78:6
+[33mWarn[39m: Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label (svelte)
+[36m					</a>
+					[35m<a href="https://github.com/314dhan" target="_blank">
+						<i class="fab fa-github"></i>
+					</a>[36m
+					<a href="https://wa.me/6289501700818" target="_blank">[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Footer.svelte[39m:81:6
+[33mWarn[39m: Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label (svelte)
+[36m					</a>
+					[35m<a href="https://wa.me/6289501700818" target="_blank">
+						<i class="fab fa-whatsapp"></i>
+					</a>[36m
+					<a href="mailto:ramadhan25321@gmail.com">[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Footer.svelte[39m:84:6
+[33mWarn[39m: Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label (svelte)
+[36m					</a>
+					[35m<a href="mailto:ramadhan25321@gmail.com">
+						<i class="fas fa-envelope"></i>
+					</a>[36m
+				</div>[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\GameProjects.svelte[39m:3:11
+[31mError[39m: Module '"./About.svelte"' has no exported member 'fadeInAction'. Did you mean to use 'import fadeInAction from "./About.svelte"' instead? (ts)
+[36m	import { t } from '$lib/stores/i18n';
+	import { [35mfadeInAction[36m } from './About.svelte';
+</script>[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Hero.svelte[39m:96:2
+[33mWarn[39m: Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label (svelte)
+[36m	</div>
+	[35m<a href="#about" class="scroll-down">
+		<i class="fas fa-chevron-down"></i>
+	</a>[36m
+</section>[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Hero.svelte[39m:8:15
+[31mError[39m: Property 'particlesJS' does not exist on type 'Window & typeof globalThis'. (ts)
+[36m		const initParticles = () => {
+			if (window.[35mparticlesJS[36m) {
+				window.particlesJS('particles-js', {[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Hero.svelte[39m:9:12
+[31mError[39m: Property 'particlesJS' does not exist on type 'Window & typeof globalThis'. (ts)
+[36m			if (window.particlesJS) {
+				window.[35mparticlesJS[36m('particles-js', {
+					particles: {[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Projects.svelte[39m:3:11
+[31mError[39m: Module '"./About.svelte"' has no exported member 'fadeInAction'. Did you mean to use 'import fadeInAction from "./About.svelte"' instead? (ts)
+[36m	import { t } from '$lib/stores/i18n';
+	import { [35mfadeInAction[36m } from './About.svelte';
+</script>[39m
+
+e:\kuzon\webboot\backend\personal website\[32msrc\lib\components\Skills.svelte[39m:4:11
+[31mError[39m: Module '"./About.svelte"' has no exported member 'fadeInAction'. Did you mean to use 'import fadeInAction from "./About.svelte"' instead? (ts)
+[36m	// Reuse the fade in action
+	import { [35mfadeInAction[36m } from './About.svelte';
+</script>[39m
+
+====================================
+[31msvelte-check found 8 errors and 5 warnings in 7 files
+[39m
+
