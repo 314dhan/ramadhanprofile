@@ -78,7 +78,7 @@ const translations = {
         footer_desc: "A backend developer passionate about building efficient systems and solving complex problems.",
         quick_links: "Quick Links",
         connect_with_me: "Connect With Me",
-        copyright: "© 2025 Ramadhan. All rights reserved."
+        copyright: "© Ramadhan. All rights reserved."
     },
     id: {
         home: "Beranda",
@@ -158,7 +158,7 @@ const translations = {
         footer_desc: "Seorang pengembang backend yang bersemangat membangun sistem yang efisien dan memecahkan masalah yang kompleks.",
         quick_links: "Tautan Cepat",
         connect_with_me: "Terhubung Dengan Saya",
-        copyright: "© 2025 Ramadhan. Hak cipta dilindungi undang-undang."
+        copyright: "© Ramadhan. Hak cipta dilindungi undang-undang."
     },
     ja: {
         home: "ホーム",
@@ -238,7 +238,7 @@ const translations = {
         footer_desc: "効率的なシステムの構築と複雑な問題の解決に情熱を注ぐバックエンド開発者。",
         quick_links: "クイックリンク",
         connect_with_me: "私とつながる",
-        copyright: "© 2025 ラマダン。全著作権所有。"
+        copyright: "© ラマダン。全著作権所有。"
     }
 };
 export { translations };

@@ -88,7 +88,7 @@
 			</div>
 		</div>
 		<div class="footer-bottom text-center mt-5">
-			<p class="mb-0">{$t('copyright')}</p>
+			<p class="mb-0">{new Date().getFullYear()} {$t('copyright')}</p>
 		</div>
 	</div>
 </footer>

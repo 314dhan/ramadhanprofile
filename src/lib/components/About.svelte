@@ -49,7 +49,7 @@
 			</div>
 			<div class="col-lg-6 mt-5 mt-lg-0">
 				<img
-					src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+					src="/images/IMG_36.jpg"
 					alt="About Me"
 					class="img-fluid about-img floating"
 				/>

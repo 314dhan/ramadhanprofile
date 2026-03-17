@@ -35,7 +35,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="project-card">
-					<img src="/images/roblox/bloptower.webp" class="card-img-top project-img" alt="Roblox Game" />
+					<img src="/images/roblox/bloptower.png" class="card-img-top project-img" alt="Roblox Game" />
 					<div class="card-body">
 						<h5 class="card-title">{$t('game2_title')}</h5>
 						<p class="card-text">{$t('game2_desc')}</p>

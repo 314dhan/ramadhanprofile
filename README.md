@@ -1,6 +1,11 @@
-# sv
+# Personal Portfolio
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+[![Live Website](https://img.shields.io/badge/Live-Website-brightgreen)](https://ramadhanprofile.vercel.app/)
+
+This is my personal portfolio website built with SvelteKit.
+
+## 🚀 Live Demo
+Visit the live site here: [https://ramadhanprofile.vercel.app/](https://ramadhanprofile.vercel.app/)
 
 ## Creating a project
 
