@@ -10,22 +10,18 @@
 	import { onMount, onDestroy } from 'svelte';
 
 	let showBackToTop = $state(false);
+	let scrollPercent = $state(0);
 
 	function handleScroll() {
-		showBackToTop = window.scrollY > 300;
+		showBackToTop = window.scrollY > 400;
 		
-		// Scroll progress bar
 		const docHeight = document.documentElement.scrollHeight;
 		const winHeight = window.innerHeight;
-		const scrollPercent = (window.scrollY / (docHeight - winHeight)) * 100;
-		const progressBar = document.getElementById('progressBar');
-		if (progressBar) {
-			progressBar.style.width = scrollPercent + '%';
-		}
+		scrollPercent = (window.scrollY / (docHeight - winHeight)) * 100;
 	}
 
 	onMount(() => {
-		window.addEventListener('scroll', handleScroll);
+		window.addEventListener('scroll', handleScroll, { passive: true });
 		handleScroll();
 	});
 
@@ -43,8 +39,8 @@
 	}
 </script>
 
-<div class="progress-container">
-	<div class="progress-bar" id="progressBar"></div>
+<div class="scroll-progress">
+	<div class="progress-fill" style="width: {scrollPercent}%"></div>
 </div>
 
 <Navbar />
@@ -61,8 +57,8 @@
 <Footer />
 
 <button 
-	class="back-to-top" 
-	class:active={showBackToTop} 
+	class="back-to-top-btn" 
+	class:visible={showBackToTop} 
 	onclick={scrollToTop}
 	aria-label="Back to top"
 >
@@ -70,9 +66,50 @@
 </button>
 
 <style>
-/* Remove default button styles for back-to-top */
-.back-to-top {
-	border: none;
-	outline: none;
-}
+	.scroll-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: transparent;
+		z-index: 2000;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: var(--accent);
+		transition: width 0.1s ease-out;
+	}
+
+	.back-to-top-btn {
+		position: fixed;
+		bottom: var(--space-6);
+		right: var(--space-6);
+		width: 48px;
+		height: 48px;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		color: var(--text-main);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+		z-index: 900;
+	}
+
+	.back-to-top-btn.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.back-to-top-btn:hover {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
+		transform: translateY(-4px);
+	}
 </style>

@@ -9,10 +9,10 @@
 	let activeSection = $state('intro');
 
 	function handleScroll() {
-		isScrolled = window.scrollY > 100;
+		isScrolled = window.scrollY > 50;
 
 		const sections = document.querySelectorAll('section');
-		const scrollPosition = window.scrollY + 100;
+		const scrollPosition = window.scrollY + 120;
 
 		sections.forEach((section) => {
 			if (
@@ -26,7 +26,7 @@
 
 	onMount(() => {
 		window.addEventListener('scroll', handleScroll);
-		handleScroll(); // initial check
+		handleScroll();
 	});
 
 	onDestroy(() => {
@@ -38,11 +38,17 @@
 	function scrollTo(id: string) {
 		const element = document.getElementById(id);
 		if (element) {
+			const offset = 80;
+			const bodyRect = document.body.getBoundingClientRect().top;
+			const elementRect = element.getBoundingClientRect().top;
+			const elementPosition = elementRect - bodyRect;
+			const offsetPosition = elementPosition - offset;
+
 			window.scrollTo({
-				top: element.offsetTop - 70,
+				top: offsetPosition,
 				behavior: 'smooth'
 			});
-			isMenuOpen = false; // close mobile menu on click
+			isMenuOpen = false;
 		}
 	}
 
@@ -51,18 +57,17 @@
 		isLangMenuOpen = false;
 	}
 
-	// Helper for the dropdown flag
 	const flags: Record<string, string> = {
-		en: 'EN \uD83C\uDDEC\uD83C\uDDE7',
-		id: 'ID \uD83C\uDDEE\uD83C\uDDE9',
-		ja: 'JP \uD83C\uDDEF\uD83C\uDDF5'
+		en: 'EN',
+		id: 'ID',
+		ja: 'JP'
 	};
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" class:scrolled={isScrolled}>
+<nav class="navbar navbar-expand-lg fixed-top" class:scrolled={isScrolled}>
 	<div class="container">
 		<a class="navbar-brand" href="#intro" onclick={(e) => { e.preventDefault(); scrollTo('intro'); }}>
-			Ramadhan<span>.</span>
+			RAMADHAN<span>.</span>
 		</a>
 		
 		<button
@@ -72,91 +77,56 @@
 			aria-label="Toggle navigation"
 			onclick={() => (isMenuOpen = !isMenuOpen)}
 		>
-			<span class="navbar-toggler-icon"></span>
+			<div class="burger" class:open={isMenuOpen}>
+				<span></span>
+				<span></span>
+			</div>
 		</button>
 		
-		<div class="collapse navbar-collapse" class:show={isMenuOpen} id="navbarNav">
+		<div class="collapse navbar-collapse" class:show={isMenuOpen}>
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						class:active={activeSection === 'intro'}
-						href="#intro"
-						onclick={(e) => { e.preventDefault(); scrollTo('intro'); }}
-					>
-						{$t('home')}
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						class:active={activeSection === 'about'}
-						href="#about"
-						onclick={(e) => { e.preventDefault(); scrollTo('about'); }}
-					>
-						{$t('about')}
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						class:active={activeSection === 'tech-stack'}
-						href="#tech-stack"
-						onclick={(e) => { e.preventDefault(); scrollTo('tech-stack'); }}
-					>
-						{$t('skills')}
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						class:active={activeSection === 'projects' || activeSection === 'game-projects'}
-						href="#projects"
-						onclick={(e) => { e.preventDefault(); scrollTo('projects'); }}
-					>
-						{$t('projects')}
-					</a>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						class:active={activeSection === 'contact'}
-						href="#contact"
-						onclick={(e) => { e.preventDefault(); scrollTo('contact'); }}
-					>
-						{$t('contact')}
-					</a>
-				</li>
+				{#each ['intro', 'about', 'tech-stack', 'projects', 'contact'] as id}
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							class:active={activeSection === id || (id === 'projects' && activeSection === 'game-projects')}
+							href="#{id}"
+							onclick={(e) => { e.preventDefault(); scrollTo(id); }}
+						>
+							{$t(id === 'intro' ? 'home' : id === 'tech-stack' ? 'skills' : id)}
+						</a>
+					</li>
+				{/each}
 			</ul>
-			<div class="d-flex align-items-center mt-3 mt-lg-0 mb-2 mb-lg-0">
-				<div class="theme-switcher mr-4" class:show={isLangMenuOpen}>
+			
+			<div class="d-flex align-items-center ml-lg-4 mt-4 mt-lg-0">
+				<button
+					class="icon-btn mr-3"
+					onclick={() => $theme = $theme === 'dark' ? 'light' : 'dark'}
+					aria-label="Toggle Theme"
+				>
+					{#if $theme === 'dark'}
+						<i class="fas fa-sun"></i>
+					{:else}
+						<i class="fas fa-moon"></i>
+					{/if}
+				</button>
+				
+				<div class="dropdown language-switcher">
 					<button
-						class="btn btn-outline-light btn-sm"
-						type="button"
-						aria-label="Toggle Theme"
-						onclick={() => $theme = $theme === 'dark' ? 'light' : 'dark'}
-					>
-						{#if $theme === 'dark'}
-							<i class="fas fa-sun"></i>
-						{:else}
-							<i class="fas fa-moon"></i>
-						{/if}
-					</button>
-				</div>
-				<div class="dropdown language-switcher" class:show={isLangMenuOpen}>
-					<button
-						class="btn btn-outline-light btn-sm dropdown-toggle"
-						type="button"
-						aria-expanded={isLangMenuOpen}
-						onclick={(e) => { e.preventDefault(); isLangMenuOpen = !isLangMenuOpen; }}
+						class="lang-btn"
+						onclick={() => isLangMenuOpen = !isLangMenuOpen}
 					>
 						{flags[$locale]}
+						<i class="fas fa-chevron-down ml-2" style="font-size: 0.6rem;"></i>
 					</button>
-					<div class="dropdown-menu" class:show={isLangMenuOpen}>
-						<button class="dropdown-item" onclick={() => setLanguage('en')}>EN &#x1F1EC;&#x1F1E7;</button>
-						<button class="dropdown-item" onclick={() => setLanguage('id')}>ID &#x1F1EE;&#x1F1E9;</button>
-						<button class="dropdown-item" onclick={() => setLanguage('ja')}>JP &#x1F1EF;&#x1F1F5;</button>
-					</div>
+					{#if isLangMenuOpen}
+						<div class="lang-dropdown">
+							<button onclick={() => setLanguage('en')}>English</button>
+							<button onclick={() => setLanguage('id')}>Indonesia</button>
+							<button onclick={() => setLanguage('ja')}>日本語</button>
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -164,15 +134,148 @@
 </nav>
 
 <style>
-    /* Add specific overrides if needed, generic styles in app.css */
-	.navbar-toggler {
-		border: none;
-		outline: none !important;
+	.navbar {
+		padding: var(--space-6) 0;
+		background: transparent;
+		transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+		z-index: 1000;
 	}
-	button.dropdown-item {
-		width: 100%;
-		text-align: left;
+
+	.navbar.scrolled {
+		padding: var(--space-3) 0;
+		background: var(--bg);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.navbar-brand {
+		font-family: 'Fraunces', serif;
+		font-weight: 800;
+		font-size: 1.25rem;
+		letter-spacing: 0.1em;
+		color: var(--text-main) !important;
+	}
+
+	.navbar-brand span {
+		color: var(--accent);
+	}
+
+	.nav-link {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--text-muted) !important;
+		padding: 0.5rem 1rem !important;
+		transition: all 0.3s ease;
+		position: relative;
+	}
+
+	.nav-link:hover, .nav-link.active {
+		color: var(--text-main) !important;
+	}
+
+	.nav-link.active::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 1rem;
+		right: 1rem;
+		height: 1px;
+		background: var(--accent);
+	}
+
+	.icon-btn, .lang-btn {
 		background: none;
 		border: none;
+		color: var(--text-muted);
+		font-size: 0.875rem;
+		padding: 0.5rem;
+		cursor: pointer;
+		transition: color 0.3s ease;
+	}
+
+	.icon-btn:hover, .lang-btn:hover {
+		color: var(--text-main);
+	}
+
+	.lang-btn {
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		display: flex;
+		align-items: center;
+	}
+
+	.language-switcher {
+		position: relative;
+	}
+
+	.lang-dropdown {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		padding: var(--space-2);
+		min-width: 120px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		margin-top: 0.5rem;
+		animation: dropFade 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	@keyframes dropFade {
+		from { opacity: 0; transform: translateY(-10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.lang-dropdown button {
+		background: none;
+		border: none;
+		color: var(--text-muted);
+		text-align: left;
+		padding: 0.5rem 1rem;
+		font-size: 0.8125rem;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.lang-dropdown button:hover {
+		background: var(--surface-bright);
+		color: var(--text-main);
+	}
+
+	.burger {
+		width: 24px;
+		height: 24px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 6px;
+	}
+
+	.burger span {
+		display: block;
+		width: 100%;
+		height: 1.5px;
+		background: var(--text-main);
+		transition: all 0.3s ease;
+	}
+
+	.burger.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+	.burger.open span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+
+	@media (max-width: 991px) {
+		.navbar-collapse {
+			background: var(--bg);
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			padding: var(--space-8) var(--space-4);
+			border-bottom: 1px solid var(--border);
+		}
 	}
 </style>

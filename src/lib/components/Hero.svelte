@@ -1,106 +1,132 @@
 <script lang="ts">
 	import { t } from '$lib/stores/i18n';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 
-	let displayText = $state('');
-	let isTyping = $state(false);
-
-	$effect(() => {
-		const fullText = $t('hero_title');
-		let i = 0;
-		displayText = '';
-		isTyping = true;
-
-		let timeoutId: ReturnType<typeof setTimeout>;
-		const typeNextChar = () => {
-			if (i < fullText.length) {
-				displayText += fullText.charAt(i);
-				i++;
-				// Random delay for realistic typing
-				timeoutId = setTimeout(typeNextChar, Math.random() * 80 + 40);
-			} else {
-				isTyping = false;
-			}
-		};
-
-		timeoutId = setTimeout(typeNextChar, 50);
-
-		return () => clearTimeout(timeoutId);
-	});
+	let visible = $state(false);
 
 	onMount(() => {
-		// Wait for Particles.js to load from CDN
-		const initParticles = () => {
-			if (window.particlesJS) {
-				window.particlesJS('particles-js', {
-					particles: {
-						number: { value: 80, density: { enable: true, value_area: 800 } },
-						color: { value: '#6c63ff' },
-						shape: {
-							type: 'circle',
-							stroke: { width: 0, color: '#000000' },
-							polygon: { nb_sides: 5 }
-						},
-						opacity: {
-							value: 0.5,
-							random: false,
-							anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
-						},
-						size: {
-							value: 3,
-							random: true,
-							anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
-						},
-						line_linked: { enable: true, distance: 150, color: '#6c63ff', opacity: 0.4, width: 1 },
-						move: {
-							enable: true,
-							speed: 2,
-							direction: 'none',
-							random: false,
-							straight: false,
-							out_mode: 'out',
-							bounce: false,
-							attract: { enable: false, rotateX: 600, rotateY: 1200 }
-						}
-					},
-					interactivity: {
-						detect_on: 'canvas',
-						events: {
-							onhover: { enable: true, mode: 'grab' },
-							onclick: { enable: true, mode: 'push' },
-							resize: true
-						},
-						modes: {
-							grab: { distance: 140, line_linked: { opacity: 1 } },
-							bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-							repulse: { distance: 200, duration: 0.4 },
-							push: { particles_nb: 4 },
-							remove: { particles_nb: 2 }
-						}
-					},
-					retina_detect: true
-				});
-			} else {
-				setTimeout(initParticles, 100);
-			}
-		};
-		initParticles();
+		setTimeout(() => visible = true, 100);
 	});
 </script>
 
-<section id="intro">
-	<div id="particles-js"></div>
-	<div class="hero-content">
-		<h1 class="typewriter-text">
-			{displayText}<span class="blinking-cursor" class:typing={isTyping}>|</span>
-		</h1>
-		<p class="hero-subtitle">{$t('hero_subtitle')}</p>
-		<div class="mt-4">
-			<a href="#about" class="btn btn-primary mr-3">{$t('explore_more')}</a>
-			<a href="#contact" class="btn btn-outline-light">{$t('contact_me')}</a>
+<section id="intro" class:visible>
+	<div class="container hero-content">
+		<div class="row align-items-center">
+			<div class="col-lg-10 offset-lg-1 text-center">
+				<h1 class="hero-title {visible ? 'fade-in-up' : ''}">
+					<span class="d-block mb-2">{$t('hero_title').split(' ')[0]}</span>
+					<span class="italic-accent">{$t('hero_title').split(' ').slice(1).join(' ')}</span>
+				</h1>
+				
+				<p class="hero-subtitle mt-4 {visible ? 'fade-in-up delay-1' : ''}">
+					{$t('hero_subtitle')}
+				</p>
+				
+				<div class="cta-group mt-5 {visible ? 'fade-in-up delay-2' : ''}">
+					<a href="#about" class="btn btn-primary">
+						{$t('explore_more')}
+					</a>
+					<a href="#contact" class="btn btn-outline-light ml-3">
+						{$t('contact_me')}
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
-	<a href="#about" class="scroll-down" aria-label="Scroll Down">
-		<i class="fas fa-chevron-down"></i>
+
+	<a href="#about" class="scroll-indicator {visible ? 'fade-in' : ''}" aria-label="Scroll Down">
+		<span class="scroll-text">Scroll</span>
+		<div class="scroll-line"></div>
 	</a>
 </section>
+
+<style>
+	#intro {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+		background: radial-gradient(circle at 10% 90%, oklch(25% 0.1 260 / 0.1), transparent 40%);
+	}
+
+	.hero-title {
+		font-family: 'Fraunces', serif;
+		font-weight: 600;
+		line-height: 0.9;
+		opacity: 0;
+	}
+
+	.italic-accent {
+		font-style: italic;
+		font-weight: 400;
+		color: var(--accent);
+		display: block;
+	}
+
+	.hero-subtitle {
+		font-size: clamp(1.1rem, 2vw, 1.4rem);
+		color: var(--text-muted);
+		max-width: 600px;
+		margin: 0 auto;
+		opacity: 0;
+	}
+
+	.cta-group {
+		opacity: 0;
+	}
+
+	.scroll-indicator {
+		position: absolute;
+		bottom: var(--space-8);
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-2);
+		text-decoration: none;
+		opacity: 0;
+	}
+
+	.scroll-text {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--text-dim);
+	}
+
+	.scroll-line {
+		width: 1px;
+		height: 60px;
+		background: linear-gradient(to bottom, var(--accent), transparent);
+		animation: scrollLine 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+		transform-origin: top;
+	}
+
+	@keyframes scrollLine {
+		0% { transform: scaleY(0); opacity: 0; }
+		50% { transform: scaleY(1); opacity: 1; }
+		100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+	}
+
+	.fade-in-up {
+		animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	}
+
+	.fade-in {
+		animation: fadeIn 1.2s ease forwards;
+	}
+
+	.delay-1 { animation-delay: 0.2s; }
+	.delay-2 { animation-delay: 0.4s; }
+
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(40px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+</style>
