@@ -52,6 +52,9 @@
 						<a href="https://github.com/314dhan" target="_blank" aria-label="Github">
 							<i class="fab fa-github"></i>
 						</a>
+						<a href="/Ramadhan_CV.pdf" target="_blank" aria-label="View CV">
+							<i class="fas fa-file-pdf"></i>
+						</a>
 						<a href="https://wa.me/6289501700818" target="_blank" aria-label="WhatsApp">
 							<i class="fab fa-whatsapp"></i>
 						</a>

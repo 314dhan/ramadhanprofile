@@ -16,6 +16,7 @@ const translations = {
         about_me_p3: "When I'm not coding, you can find me exploring new frameworks, contributing to open-source projects, or sharing knowledge with fellow developers.",
         linkedin: "LinkedIn",
         github: "GitHub",
+        download_cv: "Download CV",
         my_skills_title: "My Skills",
         my_skills_subtitle: "Here are the technologies I work with",
         php_skill: "PHP",
@@ -100,6 +101,7 @@ const translations = {
         about_me_p3: "Ketika saya tidak sedang membuat kode, Anda dapat menemukan saya menjelajahi kerangka kerja baru, berkontribusi pada proyek sumber terbuka, atau berbagi pengetahuan dengan sesama pengembang.",
         linkedin: "LinkedIn",
         github: "GitHub",
+        download_cv: "Unduh CV",
         my_skills_title: "Keahlian Saya",
         my_skills_subtitle: "Berikut adalah teknologi yang saya gunakan",
         php_skill: "PHP",
@@ -184,6 +186,7 @@ const translations = {
         about_me_p3: "コーディングをしていないときは、新しいフレームワークを探索したり、オープンソースプロジェクトに貢献したり、仲間の開発者と知識を共有したりしています。",
         linkedin: "リンクトイン",
         github: "ギットハブ",
+        view_cv: "履歴書を見る",
         my_skills_title: "私のスキル",
         my_skills_subtitle: "私が使用している技術は次のとおりです",
         php_skill: "PHP",
@@ -254,3 +257,4 @@ const translations = {
     }
 };
 export { translations };
+

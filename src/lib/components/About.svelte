@@ -52,10 +52,18 @@
 					<a 
 						href="https://github.com/314dhan" 
 						target="_blank" 
-						class="social-link ml-4"
+						class="social-link"
 					>
 						<span class="link-icon"><i class="fab fa-github"></i></span>
 						<span class="link-text">{$t('github')}</span>
+					</a>
+					<a 
+						href="/Ramadhan_CV.pdf" 
+						target="_blank"
+						class="social-link"
+					>
+						<span class="link-icon"><i class="fas fa-file-pdf"></i></span>
+						<span class="link-text">{$t('view_cv')}</span>
 					</a>
 				</div>
 			</div>
@@ -122,6 +130,12 @@
 		color: var(--text-muted);
 		line-height: 1.8;
 		margin-bottom: var(--space-3);
+	}
+
+	.social-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
 	}
 
 	.social-link {

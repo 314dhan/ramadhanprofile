@@ -26,7 +26,7 @@
 					<a href="#about" class="btn btn-primary">
 						{$t('explore_more')}
 					</a>
-					<a href="#contact" class="btn btn-outline-light ml-3">
+					<a href="#contact" class="btn btn-outline-light">
 						{$t('contact_me')}
 					</a>
 				</div>
@@ -73,6 +73,10 @@
 
 	.cta-group {
 		opacity: 0;
+		display: flex;
+		gap: var(--space-3);
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 
 	.scroll-indicator {
