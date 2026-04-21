@@ -1,6 +1,16 @@
 <script lang="ts">
-	import { t } from '$lib/stores/i18n';
+	import { t, locale } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
+	import { derived } from 'svelte/store';
+
+	// Language-aware CV URL: JP → Ramadhan_CV_JP.pdf, EN/ID → Ramadhan_CV_I.pdf
+	const cvUrl = derived(locale, ($locale) =>
+		$locale === 'ja' ? '/Ramadhan_CV_JP.pdf' : '/Ramadhan_CV_I.pdf'
+	);
+
+	const cvLabel = derived(locale, ($locale) =>
+		$locale === 'ja' ? 'view_cv' : 'download_cv'
+	);
 
 	let visible = $state(false);
 	onMount(() => {
@@ -58,12 +68,12 @@
 						<span class="link-text">{$t('github')}</span>
 					</a>
 					<a 
-						href="/Ramadhan_CV.pdf" 
+						href={$cvUrl}
 						target="_blank"
 						class="social-link"
 					>
 						<span class="link-icon"><i class="fas fa-file-pdf"></i></span>
-						<span class="link-text">{$t('view_cv')}</span>
+						<span class="link-text">{$t($cvLabel)}</span>
 					</a>
 				</div>
 			</div>
