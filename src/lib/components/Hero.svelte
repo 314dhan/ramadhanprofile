@@ -5,16 +5,43 @@
 	let visible = $state(false);
 	let mouseX = $state(0);
 	let mouseY = $state(0);
+	let clicks = $state<{ x: number; y: number; id: number }[]>([]);
+	let clickId = 0;
 
 	onMount(() => {
 		setTimeout(() => visible = true, 100);
-
 		function onMouseMove(e: MouseEvent) {
 			mouseX = e.clientX;
 			mouseY = e.clientY;
 		}
+
+		function onClick(e: MouseEvent) {
+			const intro = document.getElementById('intro');
+			if (!intro) return;
+			const rect = intro.getBoundingClientRect();
+			
+			// Only trigger ripple if click is within the hero section
+			if (
+				e.clientX >= rect.left && e.clientX <= rect.right &&
+				e.clientY >= rect.top && e.clientY <= rect.bottom
+			) {
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const id = clickId++;
+				clicks.push({ x, y, id });
+				
+				setTimeout(() => {
+					clicks = clicks.filter((c) => c.id !== id);
+				}, 600);
+			}
+		}
+
 		window.addEventListener('mousemove', onMouseMove, { passive: true });
-		return () => window.removeEventListener('mousemove', onMouseMove);
+		window.addEventListener('click', onClick, { passive: true });
+		return () => {
+			window.removeEventListener('mousemove', onMouseMove);
+			window.removeEventListener('click', onClick);
+		};
 	});
 </script>
 
@@ -26,8 +53,18 @@
 		aria-hidden="true"
 	></div>
 
+
 	<!-- Decorative grid -->
 	<div class="hero-grid" aria-hidden="true"></div>
+
+	<!-- Click ripples -->
+	{#each clicks as click (click.id)}
+		<div
+			class="click-ripple"
+			style="--rx: {click.x}px; --ry: {click.y}px;"
+			aria-hidden="true"
+		></div>
+	{/each}
 
 	<div class="container hero-content">
 		<div class="row align-items-center">
@@ -95,6 +132,7 @@
 		transition: background 0.3s ease;
 	}
 
+
 	/* Subtle dot-grid overlay */
 	.hero-grid {
 		position: absolute;
@@ -109,6 +147,32 @@
 	.hero-content {
 		position: relative;
 		z-index: 1;
+	}
+
+	/* Click animation in background */
+	.click-ripple {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		border: 2px solid var(--accent);
+		box-shadow: 0 0 20px var(--accent) inset, 0 0 10px var(--accent);
+		pointer-events: none;
+		z-index: 0;
+		animation: ripple-scale 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+	}
+
+	@keyframes ripple-scale {
+		0% {
+			transform: translate(calc(var(--rx) - 50px), calc(var(--ry) - 50px)) scale(0);
+			opacity: 0.8;
+		}
+		100% {
+			transform: translate(calc(var(--rx) - 50px), calc(var(--ry) - 50px)) scale(1.5);
+			opacity: 0;
+		}
 	}
 
 	/* Eyebrow availability indicator */
