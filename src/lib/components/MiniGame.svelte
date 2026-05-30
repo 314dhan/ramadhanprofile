@@ -90,8 +90,7 @@
 	.modal-backdrop {
 		position: absolute;
 		inset: 0;
-		background: oklch(8% 0.01 260 / 0.75);
-		backdrop-filter: blur(4px);
+		background: oklch(0% 0 0 / 0.3);
 	}
 
 	.modal-panel {
@@ -99,6 +98,7 @@
 		z-index: 1;
 		background: var(--surface);
 		border: 1px solid var(--border-bright);
+		box-shadow: 0 0 0 1px var(--accent), 0 32px 80px oklch(0% 0 0 / 0.6);
 		padding: var(--space-4);
 		max-height: 90vh;
 		overflow-y: auto;

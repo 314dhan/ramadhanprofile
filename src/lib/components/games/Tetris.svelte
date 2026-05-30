@@ -11,6 +11,7 @@
 	const COLS = 10;
 	const ROWS = 20;
 	const CELL = 28;
+	const PREVIEW_SIZE = 4;
 
 	const SHAPES: number[][][] = [
 		[[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], // I
@@ -22,9 +23,8 @@
 		[[0,0,1],[1,1,1],[0,0,0]],                  // L
 	];
 
-	// All pieces share accent lightness/chroma, varying only hue
 	const PIECE_COLORS = [
-		'oklch(72% 0.14 260)', // I - indigo (matches --accent)
+		'oklch(72% 0.14 260)', // I - indigo
 		'oklch(72% 0.14 200)', // O - teal
 		'oklch(72% 0.14 300)', // T - purple
 		'oklch(72% 0.14 145)', // S - green
@@ -32,6 +32,9 @@
 		'oklch(72% 0.14 350)', // J - pink
 		'oklch(72% 0.14 80)',  // L - yellow
 	];
+
+	const CANVAS_BG = 'oklch(38% 0.04 260)';
+	const GRID_COLOR = 'oklch(55% 0.03 260 / 0.3)';
 
 	// ── Types ────────────────────────────────────────────────────────────────
 	interface Piece {
@@ -111,21 +114,22 @@
 		return Math.max(100, 800 - (level - 1) * 75);
 	}
 
-	// ── Reactive state (shown in template) ───────────────────────────────────
+	// ── Reactive state ───────────────────────────────────────────────────────
 	let score = $state(0);
 	let level = $state(1);
 	let totalLines = $state(0);
 	let gameOver = $state(false);
 	let internalPaused = $state(false);
 
-	// ── Non-reactive game data (canvas-only) ─────────────────────────────────
+	// ── Non-reactive game data ───────────────────────────────────────────────
 	let board = createBoard();
 	let current = randomPiece();
 	let next = randomPiece();
 
 	let canvas: HTMLCanvasElement;
+	let nextCanvas: HTMLCanvasElement;
 
-	// ── Canvas helpers ───────────────────────────────────────────────────────
+	// ── Drawing ──────────────────────────────────────────────────────────────
 	function ghostY(): number {
 		let gy = current.y;
 		while (!collides(board, current, 0, gy - current.y + 1)) gy++;
@@ -136,24 +140,26 @@
 		ctx.globalAlpha = alpha;
 		ctx.fillStyle = color;
 		ctx.fillRect(x * CELL + 1, y * CELL + 1, CELL - 2, CELL - 2);
-		// subtle top-edge highlight
-		ctx.fillStyle = 'rgba(255,255,255,0.12)';
+		ctx.fillStyle = 'rgba(255,255,255,0.15)';
 		ctx.fillRect(x * CELL + 1, y * CELL + 1, CELL - 2, 3);
 		ctx.globalAlpha = 1;
 	}
 
-	function draw(ctx: CanvasRenderingContext2D) {
-		ctx.fillStyle = 'oklch(12% 0.015 260)';
-		ctx.fillRect(0, 0, COLS * CELL, ROWS * CELL);
-
-		ctx.strokeStyle = 'oklch(25% 0.02 260 / 0.25)';
+	function drawGrid(ctx: CanvasRenderingContext2D, cols: number, rows: number) {
+		ctx.strokeStyle = GRID_COLOR;
 		ctx.lineWidth = 0.5;
-		for (let r = 0; r <= ROWS; r++) {
-			ctx.beginPath(); ctx.moveTo(0, r * CELL); ctx.lineTo(COLS * CELL, r * CELL); ctx.stroke();
+		for (let r = 0; r <= rows; r++) {
+			ctx.beginPath(); ctx.moveTo(0, r * CELL); ctx.lineTo(cols * CELL, r * CELL); ctx.stroke();
 		}
-		for (let c = 0; c <= COLS; c++) {
-			ctx.beginPath(); ctx.moveTo(c * CELL, 0); ctx.lineTo(c * CELL, ROWS * CELL); ctx.stroke();
+		for (let c = 0; c <= cols; c++) {
+			ctx.beginPath(); ctx.moveTo(c * CELL, 0); ctx.lineTo(c * CELL, rows * CELL); ctx.stroke();
 		}
+	}
+
+	function draw(ctx: CanvasRenderingContext2D) {
+		ctx.fillStyle = CANVAS_BG;
+		ctx.fillRect(0, 0, COLS * CELL, ROWS * CELL);
+		drawGrid(ctx, COLS, ROWS);
 
 		for (let r = 0; r < ROWS; r++) {
 			for (let c = 0; c < COLS; c++) {
@@ -165,7 +171,7 @@
 			const gy = ghostY();
 			current.shape.forEach((row, r) => {
 				row.forEach((cell, c) => {
-					if (cell) drawCell(ctx, current.x + c, gy + r, PIECE_COLORS[current.shapeIdx], 0.2);
+					if (cell) drawCell(ctx, current.x + c, gy + r, PIECE_COLORS[current.shapeIdx], 0.25);
 				});
 			});
 			current.shape.forEach((row, r) => {
@@ -174,6 +180,22 @@
 				});
 			});
 		}
+	}
+
+	function drawNext(ctx: CanvasRenderingContext2D) {
+		const size = PREVIEW_SIZE * CELL;
+		ctx.fillStyle = CANVAS_BG;
+		ctx.fillRect(0, 0, size, size);
+		drawGrid(ctx, PREVIEW_SIZE, PREVIEW_SIZE);
+
+		const shape = next.shape;
+		const offsetX = Math.floor((PREVIEW_SIZE - shape[0].length) / 2);
+		const offsetY = Math.floor((PREVIEW_SIZE - shape.length) / 2);
+		shape.forEach((row, r) => {
+			row.forEach((cell, c) => {
+				if (cell) drawCell(ctx, offsetX + c, offsetY + r, PIECE_COLORS[next.shapeIdx]);
+			});
+		});
 	}
 
 	// ── Game actions ─────────────────────────────────────────────────────────
@@ -235,9 +257,10 @@
 		internalPaused = false;
 	}
 
-	// ── Mount: game loop + keyboard ──────────────────────────────────────────
+	// ── Mount ────────────────────────────────────────────────────────────────
 	onMount(() => {
 		const ctx = canvas.getContext('2d')!;
+		const nCtx = nextCanvas.getContext('2d')!;
 		let rafId: number;
 		let lastTime = 0;
 		let dropAcc = 0;
@@ -255,6 +278,7 @@
 			}
 
 			draw(ctx);
+			drawNext(nCtx);
 			rafId = requestAnimationFrame(loop);
 		}
 
@@ -302,21 +326,32 @@
 		</div>
 	</div>
 
-	<div class="canvas-wrapper">
-		<canvas bind:this={canvas} width={COLS * CELL} height={ROWS * CELL}></canvas>
-		{#if gameOver}
-			<div class="overlay">
-				<h4>Game Over</h4>
-				<p class="final-score">{score}</p>
-				<button class="restart-btn" onclick={restart}>Restart</button>
-				<p class="hint">or press Enter</p>
+	<div class="game-area">
+		<!-- Left: next piece preview -->
+		<div class="side-panel">
+			<span class="panel-label">Next</span>
+			<div class="next-wrapper">
+				<canvas bind:this={nextCanvas} width={PREVIEW_SIZE * CELL} height={PREVIEW_SIZE * CELL}></canvas>
 			</div>
-		{:else if internalPaused}
-			<div class="overlay">
-				<p class="paused-text">PAUSED</p>
-				<p class="hint">Press P to resume</p>
-			</div>
-		{/if}
+		</div>
+
+		<!-- Main game canvas -->
+		<div class="canvas-wrapper">
+			<canvas bind:this={canvas} width={COLS * CELL} height={ROWS * CELL}></canvas>
+			{#if gameOver}
+				<div class="overlay">
+					<h4>Game Over</h4>
+					<p class="final-score">{score}</p>
+					<button class="restart-btn" onclick={restart}>Restart</button>
+					<p class="hint">or press Enter</p>
+				</div>
+			{:else if internalPaused}
+				<div class="overlay">
+					<p class="paused-text">PAUSED</p>
+					<p class="hint">Press P to resume</p>
+				</div>
+			{/if}
+		</div>
 	</div>
 
 	<div class="controls-hint">
@@ -369,6 +404,35 @@
 		text-align: center;
 	}
 
+	.game-area {
+		display: flex;
+		gap: var(--space-3);
+		align-items: flex-start;
+	}
+
+	.side-panel {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.panel-label {
+		font-size: 0.6rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--text-dim);
+	}
+
+	.next-wrapper {
+		border: 1px solid var(--border);
+	}
+
+	.next-wrapper canvas {
+		display: block;
+	}
+
 	.canvas-wrapper {
 		position: relative;
 		border: 1px solid var(--border);
@@ -386,8 +450,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: var(--space-2);
-		background: oklch(12% 0.015 260 / 0.85);
-		backdrop-filter: blur(4px);
+		background: oklch(12% 0.015 260 / 0.92);
 	}
 
 	.overlay h4 {
