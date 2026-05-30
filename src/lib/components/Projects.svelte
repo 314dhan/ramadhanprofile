@@ -21,13 +21,15 @@
 		{ id: 6, img: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=800&q=80', url: 'https://chat-app-messaging-gamma.vercel.app/', tags: ['Vue', 'NodeJS'] },
 		{ id: 7, img: '/images/kanji-flash-card-projecto.png', url: 'https://kanji-flash-card-project.vercel.app/', tags: ['JS', 'CSS'] },
 		{ id: 8, img: '/images/sswfood.png', url: 'https://ssw-foodfactory.vercel.app/', tags: ['HTML', 'CSS'] },
-		{ id: 9, img: '/images/ssw-restoran.png', url: 'https://ssw-restoran.vercel.app/', tags: ['JS', 'CSS'] }
+		{ id: 9, img: '/images/ssw-restoran.png', url: 'https://ssw-restoran.vercel.app/', tags: ['JS', 'CSS'] },
+		{ id: 10, img: 'https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?auto=format&fit=crop&w=800&q=80', url: 'https://kolam-renang-cv-tirta-nada.vercel.app/', tags: ['HTML', 'CSS', 'JS'] }
 	];
 
 	const aiRepos = [
 		{ name: 'coding-llm-local', description: 'Local LLM coding assistant — run AI code suggestions offline', language: 'Python', url: 'https://github.com/314dhan/coding-llm-local' },
 		{ name: 'compress-video-python', description: 'Batch video compression script with configurable quality settings', language: 'Python', url: 'https://github.com/314dhan/compress-video-python' },
 		{ name: 'download-manager', description: 'Python download manager with queue and progress tracking', language: 'Python', url: 'https://github.com/314dhan/download-manager' },
+		{ name: 'translator-screen', description: 'Screen-based translation tool — translate any text on screen in real time', language: 'Python', url: 'https://github.com/314dhan/translator-screen' },
 	];
 </script>
 

@@ -103,10 +103,11 @@
 					</div>
 					<div class="github-card-wrapper">
 						<img
-							src="https://github-readme-stats.vercel.app/api?username=314dhan&show_icons=true&hide_border=false&bg_color=111318&title_color=6b8af5&text_color=e8e9ed&icon_color=6b8af5&border_color=2a2d36&cache_seconds=86400"
-							alt="GitHub contribution stats for 314dhan"
+							src="https://ghchart.rshah.org/6b8af5/314dhan"
+							alt="GitHub contribution chart for 314dhan"
 							loading="lazy"
 							class="github-stats-img"
+							onerror={(e) => { const el = e.currentTarget as HTMLImageElement; if (el.parentElement) el.parentElement.style.display = 'none'; }}
 						/>
 					</div>
 				</div>
