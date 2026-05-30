@@ -7,8 +7,7 @@
 	import GameProjects from '$lib/components/GameProjects.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import MiniGame from '$lib/components/MiniGame.svelte';
-	import { onMount, onDestroy } from 'svelte';
+import { onMount, onDestroy } from 'svelte';
 
 	let showBackToTop = $state(false);
 	let scrollPercent = $state(0);
@@ -65,8 +64,6 @@
 >
 	<i class="fas fa-arrow-up"></i>
 </button>
-
-<MiniGame />
 
 <style>
 	.scroll-progress {
