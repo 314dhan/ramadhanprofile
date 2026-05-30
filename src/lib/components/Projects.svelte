@@ -23,6 +23,12 @@
 		{ id: 8, img: '/images/sswfood.png', url: 'https://ssw-foodfactory.vercel.app/', tags: ['HTML', 'CSS'] },
 		{ id: 9, img: '/images/ssw-restoran.png', url: 'https://ssw-restoran.vercel.app/', tags: ['JS', 'CSS'] }
 	];
+
+	const aiRepos = [
+		{ name: 'coding-llm-local', description: 'Local LLM coding assistant — run AI code suggestions offline', language: 'Python', url: 'https://github.com/314dhan/coding-llm-local' },
+		{ name: 'compress-video-python', description: 'Batch video compression script with configurable quality settings', language: 'Python', url: 'https://github.com/314dhan/compress-video-python' },
+		{ name: 'download-manager', description: 'Python download manager with queue and progress tracking', language: 'Python', url: 'https://github.com/314dhan/download-manager' },
+	];
 </script>
 
 <section id="projects" class:visible>
@@ -63,6 +69,41 @@
 					</div>
 				</a>
 			{/each}
+		</div>
+
+		<div class="ai-section {visible ? 'fade-in-up' : ''}" style="animation-delay: 0.4s">
+			<div class="row mb-4 align-items-end">
+				<div class="col-lg-8">
+					<span class="section-label">AI Tools</span>
+					<h3 class="ai-section-title mt-2">Python tools built with Claude AI</h3>
+				</div>
+			</div>
+			<div class="repos-grid">
+				{#each aiRepos as repo, i}
+					<a
+						href={repo.url}
+						class="repo-item {visible ? 'fade-in-up' : ''}"
+						style="animation-delay: {(projects.length + i) * 0.1}s"
+						target="_blank"
+						rel="noopener"
+					>
+						<div class="repo-icon-wrapper">
+							<i class="fab fa-github repo-icon"></i>
+						</div>
+						<div class="repo-info">
+							<div class="d-flex justify-content-between align-items-start">
+								<h3 class="project-title repo-name">{repo.name}</h3>
+								<i class="fas fa-arrow-right arrow-icon"></i>
+							</div>
+							<p class="project-desc">{repo.description}</p>
+							<div class="project-tags">
+								<span class="tag">{repo.language}</span>
+								<span class="tag tag--claude">Built with Claude</span>
+							</div>
+						</div>
+					</a>
+				{/each}
+			</div>
 		</div>
 	</div>
 </section>
@@ -185,10 +226,79 @@
 		to { opacity: 1; transform: translateY(0); }
 	}
 
+	.ai-section {
+		opacity: 0;
+		border-top: 1px solid var(--border);
+		padding-top: var(--space-8);
+		margin-top: var(--space-8);
+	}
+
+	.ai-section-title {
+		font-family: 'Fraunces', serif;
+		font-size: 1.5rem;
+		color: var(--text-muted);
+		font-weight: 400;
+	}
+
+	.repos-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-4);
+	}
+
+	.repo-item {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		text-decoration: none;
+		color: inherit;
+		opacity: 0;
+		padding: var(--space-4);
+		border: 1px solid var(--border);
+		background: var(--surface);
+		transition: border-color 0.3s ease, background 0.3s ease;
+	}
+
+	.repo-item:hover {
+		text-decoration: none;
+		color: inherit;
+		border-color: var(--accent);
+		background: var(--surface-bright);
+	}
+
+	.repo-icon-wrapper {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--border);
+		color: var(--text-dim);
+		transition: all 0.3s ease;
+	}
+
+	.repo-item:hover .repo-icon-wrapper {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	.repo-icon { font-size: 1.1rem; }
+	.repo-name { font-size: 0.9rem !important; letter-spacing: 0.02em; }
+
+	.tag--claude {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	@media (max-width: 991px) {
+		.repos-grid { grid-template-columns: repeat(2, 1fr); }
+	}
+
 	@media (max-width: 768px) {
 		.projects-grid {
 			grid-template-columns: 1fr;
 			gap: var(--space-8);
 		}
+		.repos-grid { grid-template-columns: 1fr; }
 	}
 </style>

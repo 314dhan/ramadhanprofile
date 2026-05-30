@@ -13,6 +13,8 @@
 	);
 
 	let visible = $state(false);
+	let githubRepos = $state<number | null>(null);
+
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
 			if (entries[0].isIntersecting) {
@@ -20,9 +22,14 @@
 				observer.disconnect();
 			}
 		}, { threshold: 0.2 });
-		
+
 		const section = document.getElementById('about');
 		if (section) observer.observe(section);
+
+		fetch('https://api.github.com/users/314dhan')
+			.then(r => r.json())
+			.then(data => { githubRepos = data.public_repos; })
+			.catch(() => { githubRepos = null; });
 	});
 </script>
 
@@ -75,6 +82,33 @@
 						<span class="link-icon"><i class="fas fa-file-pdf"></i></span>
 						<span class="link-text">{$t($cvLabel)}</span>
 					</a>
+				</div>
+
+				<div class="github-strip mt-5 {visible ? 'fade-in-right' : ''}">
+					<div class="github-stats-row">
+						<div class="stat-item">
+							<span class="stat-value {githubRepos === null ? 'stat-loading' : ''}">{githubRepos ?? '—'}</span>
+							<span class="stat-label">Repos</span>
+						</div>
+						<div class="stat-divider"></div>
+						<div class="stat-item">
+							<span class="stat-value">Python · JS · PHP</span>
+							<span class="stat-label">Languages</span>
+						</div>
+						<a href="https://github.com/314dhan" target="_blank" rel="noopener" class="github-profile-link">
+							<i class="fab fa-github"></i>
+							View GitHub
+							<i class="fas fa-external-link-alt github-ext-icon"></i>
+						</a>
+					</div>
+					<div class="github-card-wrapper">
+						<img
+							src="https://github-readme-stats.vercel.app/api?username=314dhan&show_icons=true&hide_border=false&bg_color=111318&title_color=6b8af5&text_color=e8e9ed&icon_color=6b8af5&border_color=2a2d36&cache_seconds=86400"
+							alt="GitHub contribution stats for 314dhan"
+							loading="lazy"
+							class="github-stats-img"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -199,4 +233,56 @@
 		from { opacity: 0; transform: translateX(40px); }
 		to { opacity: 1; transform: translateX(0); }
 	}
+
+	.github-strip { opacity: 0; }
+
+	.github-stats-row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		flex-wrap: wrap;
+		padding: var(--space-3) var(--space-4);
+		border: 1px solid var(--border);
+		background: var(--surface);
+		margin-bottom: var(--space-3);
+	}
+
+	.stat-item { display: flex; flex-direction: column; gap: 2px; }
+
+	.stat-value {
+		font-family: 'Fraunces', serif;
+		font-size: 1.1rem;
+		color: var(--text-main);
+		font-weight: 600;
+	}
+
+	.stat-value.stat-loading { color: var(--text-dim); }
+
+	.stat-label {
+		font-size: 0.6rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--text-dim);
+	}
+
+	.stat-divider { width: 1px; height: 32px; background: var(--border); }
+
+	.github-profile-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin-left: auto;
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-decoration: none;
+		color: var(--accent);
+		transition: color 0.2s ease;
+	}
+
+	.github-profile-link:hover { color: var(--accent-bright); text-decoration: none; }
+	.github-ext-icon { font-size: 0.6rem; }
+
+	.github-card-wrapper { border: 1px solid var(--border); overflow: hidden; }
+	.github-stats-img { display: block; width: 100%; height: auto; }
 </style>
