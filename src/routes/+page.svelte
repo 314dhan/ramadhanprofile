@@ -7,6 +7,7 @@
 	import GameProjects from '$lib/components/GameProjects.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import MiniGame from '$lib/components/MiniGame.svelte';
 	import { onMount, onDestroy } from 'svelte';
 
 	let showBackToTop = $state(false);
@@ -56,14 +57,16 @@
 
 <Footer />
 
-<button 
-	class="back-to-top-btn" 
-	class:visible={showBackToTop} 
+<button
+	class="back-to-top-btn"
+	class:visible={showBackToTop}
 	onclick={scrollToTop}
 	aria-label="Back to top"
 >
 	<i class="fas fa-arrow-up"></i>
 </button>
+
+<MiniGame />
 
 <style>
 	.scroll-progress {
