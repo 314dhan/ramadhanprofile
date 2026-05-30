@@ -12,8 +12,17 @@
 		$locale === 'ja' ? 'view_cv' : 'download_cv'
 	);
 
+	interface LangStat { name: string; percent: number; }
+	interface GitHubStats { repos: number; followers: number; avatar: string; topLangs: LangStat[]; }
+
+	const LANG_COLORS: Record<string, string> = {
+		Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#2b7489',
+		PHP: '#4F5D95', HTML: '#e34c26', CSS: '#563d7c',
+		Lua: '#000080', Go: '#00ADD8', Svelte: '#ff3e00', Dart: '#00B4AB',
+	};
+
 	let visible = $state(false);
-	let githubRepos = $state<number | null>(null);
+	let githubStats = $state<GitHubStats | null>(null);
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -26,10 +35,22 @@
 		const section = document.getElementById('about');
 		if (section) observer.observe(section);
 
-		fetch('https://api.github.com/users/314dhan')
-			.then(r => r.json())
-			.then(data => { githubRepos = data.public_repos; })
-			.catch(() => { githubRepos = null; });
+		Promise.all([
+			fetch('https://api.github.com/users/314dhan').then(r => r.json()),
+			fetch('https://api.github.com/users/314dhan/repos?per_page=100').then(r => r.json()),
+		]).then(([user, repos]) => {
+			const langCount: Record<string, number> = {};
+			repos.forEach((repo: { language: string | null }) => {
+				if (repo.language) langCount[repo.language] = (langCount[repo.language] ?? 0) + 1;
+			});
+			const total = Object.values(langCount).reduce((a, b) => a + b, 0);
+			const topLangs = Object.entries(langCount)
+				.sort((a, b) => b[1] - a[1])
+				.slice(0, 5)
+				.map(([name, count]) => ({ name, percent: Math.round((count / total) * 100) }));
+
+			githubStats = { repos: user.public_repos, followers: user.followers, avatar: user.avatar_url, topLangs };
+		}).catch(() => { githubStats = null; });
 	});
 </script>
 
@@ -84,33 +105,46 @@
 					</a>
 				</div>
 
-				<div class="github-strip mt-5 {visible ? 'fade-in-right' : ''}">
-					<div class="github-stats-row">
-						<div class="stat-item">
-							<span class="stat-value {githubRepos === null ? 'stat-loading' : ''}">{githubRepos ?? '—'}</span>
-							<span class="stat-label">Repos</span>
+				{#if githubStats}
+				<div class="gh-card mt-5 {visible ? 'fade-in-right' : ''}">
+					<div class="gh-header">
+						<img src={githubStats.avatar} alt="GitHub avatar" class="gh-avatar" />
+						<div class="gh-identity">
+							<span class="gh-username">314dhan</span>
+							<div class="gh-meta-row">
+								<span class="gh-stat"><i class="fas fa-book-open"></i> {githubStats.repos} repos</span>
+								<span class="gh-stat"><i class="fas fa-users"></i> {githubStats.followers} followers</span>
+							</div>
 						</div>
-						<div class="stat-divider"></div>
-						<div class="stat-item">
-							<span class="stat-value">Python · JS · PHP</span>
-							<span class="stat-label">Languages</span>
-						</div>
-						<a href="https://github.com/314dhan" target="_blank" rel="noopener" class="github-profile-link">
-							<i class="fab fa-github"></i>
-							View GitHub
-							<i class="fas fa-external-link-alt github-ext-icon"></i>
+						<a href="https://github.com/314dhan" target="_blank" rel="noopener" class="gh-view-btn">
+							View Profile <i class="fas fa-external-link-alt"></i>
 						</a>
 					</div>
-					<div class="github-card-wrapper">
-						<img
-							src="https://ghchart.rshah.org/6b8af5/314dhan"
-							alt="GitHub contribution chart for 314dhan"
-							loading="lazy"
-							class="github-stats-img"
-							onerror={(e) => { const el = e.currentTarget as HTMLImageElement; if (el.parentElement) el.parentElement.style.display = 'none'; }}
-						/>
+
+					{#if githubStats.topLangs.length > 0}
+					<div class="gh-langs">
+						<div class="gh-bar">
+							{#each githubStats.topLangs as lang}
+								<div
+									class="gh-bar-seg"
+									style="width:{lang.percent}%;background:{LANG_COLORS[lang.name] ?? '#8b8b8b'}"
+									title="{lang.name} {lang.percent}%"
+								></div>
+							{/each}
+						</div>
+						<div class="gh-legend">
+							{#each githubStats.topLangs as lang}
+								<div class="gh-legend-item">
+									<span class="gh-dot" style="background:{LANG_COLORS[lang.name] ?? '#8b8b8b'}"></span>
+									<span class="gh-lang-name">{lang.name}</span>
+									<span class="gh-lang-pct">{lang.percent}%</span>
+								</div>
+							{/each}
+						</div>
 					</div>
+					{/if}
 				</div>
+				{/if}
 			</div>
 		</div>
 	</div>
@@ -235,55 +269,126 @@
 		to { opacity: 1; transform: translateX(0); }
 	}
 
-	.github-strip { opacity: 0; }
-
-	.github-stats-row {
-		display: flex;
-		align-items: center;
-		gap: var(--space-4);
-		flex-wrap: wrap;
-		padding: var(--space-3) var(--space-4);
+	.gh-card {
+		opacity: 0;
 		border: 1px solid var(--border);
 		background: var(--surface);
-		margin-bottom: var(--space-3);
+		padding: var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
 	}
 
-	.stat-item { display: flex; flex-direction: column; gap: 2px; }
+	.gh-header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
 
-	.stat-value {
+	.gh-avatar {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 2px solid var(--border);
+		flex-shrink: 0;
+	}
+
+	.gh-identity {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		flex: 1;
+	}
+
+	.gh-username {
 		font-family: 'Fraunces', serif;
-		font-size: 1.1rem;
-		color: var(--text-main);
+		font-size: 1rem;
 		font-weight: 600;
+		color: var(--text-main);
 	}
 
-	.stat-value.stat-loading { color: var(--text-dim); }
-
-	.stat-label {
-		font-size: 0.6rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--text-dim);
+	.gh-meta-row {
+		display: flex;
+		gap: var(--space-3);
 	}
 
-	.stat-divider { width: 1px; height: 32px; background: var(--border); }
+	.gh-stat {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
 
-	.github-profile-link {
+	.gh-stat i { font-size: 0.65rem; color: var(--text-dim); }
+
+	.gh-view-btn {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		margin-left: auto;
-		font-size: 0.8rem;
+		gap: 0.35rem;
+		font-size: 0.75rem;
 		font-weight: 600;
 		text-decoration: none;
 		color: var(--accent);
-		transition: color 0.2s ease;
+		border: 1px solid var(--accent);
+		padding: 0.3rem 0.75rem;
+		transition: all 0.2s ease;
+		white-space: nowrap;
+		flex-shrink: 0;
 	}
 
-	.github-profile-link:hover { color: var(--accent-bright); text-decoration: none; }
-	.github-ext-icon { font-size: 0.6rem; }
+	.gh-view-btn:hover {
+		background: var(--accent);
+		color: white;
+		text-decoration: none;
+	}
 
-	.github-card-wrapper { border: 1px solid var(--border); overflow: hidden; }
-	.github-stats-img { display: block; width: 100%; height: auto; }
+	.gh-view-btn i { font-size: 0.6rem; }
+
+	.gh-langs { display: flex; flex-direction: column; gap: var(--space-2); }
+
+	.gh-bar {
+		height: 8px;
+		border-radius: 4px;
+		display: flex;
+		overflow: hidden;
+		gap: 2px;
+	}
+
+	.gh-bar-seg {
+		height: 100%;
+		border-radius: 2px;
+		transition: opacity 0.2s ease;
+	}
+
+	.gh-bar-seg:hover { opacity: 0.8; }
+
+	.gh-legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2) var(--space-4);
+	}
+
+	.gh-legend-item {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.gh-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	.gh-lang-name {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+	}
+
+	.gh-lang-pct {
+		font-size: 0.7rem;
+		color: var(--text-dim);
+	}
 </style>
