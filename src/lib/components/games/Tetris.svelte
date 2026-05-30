@@ -354,6 +354,20 @@
 		</div>
 	</div>
 
+	<!-- Touch controls (works on mobile + desktop) -->
+	<div class="touch-controls">
+		<div class="touch-row">
+			<button class="touch-btn" onpointerdown={() => { if (!gameOver && !paused && !internalPaused) movePiece(-1); }} aria-label="Move left">←</button>
+			<button class="touch-btn" onpointerdown={() => { if (!gameOver && !paused && !internalPaused) rotateCurrent(); }} aria-label="Rotate">↺</button>
+			<button class="touch-btn" onpointerdown={() => { if (!gameOver && !paused && !internalPaused) movePiece(1); }} aria-label="Move right">→</button>
+		</div>
+		<div class="touch-row">
+			<button class="touch-btn" onpointerdown={() => { if (!gameOver && !paused && !internalPaused) softDrop(); }} aria-label="Soft drop">↓</button>
+			<button class="touch-btn touch-btn--accent" onpointerdown={() => { if (!gameOver && !paused && !internalPaused) hardDrop(); }} aria-label="Hard drop">⬇⬇</button>
+			<button class="touch-btn" onpointerdown={() => { if (!gameOver) internalPaused = !internalPaused; }} aria-label="Pause">⏸</button>
+		</div>
+	</div>
+
 	<div class="controls-hint">
 		<span>← → Move</span>
 		<span>↑/Z Rotate</span>
@@ -497,6 +511,51 @@
 		font-size: 0.75rem;
 		color: var(--text-dim);
 		margin: 0;
+	}
+
+	.touch-controls {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+		align-items: center;
+	}
+
+	.touch-row {
+		display: flex;
+		gap: var(--space-2);
+	}
+
+	.touch-btn {
+		width: 56px;
+		height: 56px;
+		background: var(--surface-bright);
+		border: 1px solid var(--border-bright);
+		color: var(--text-main);
+		font-size: 1.2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		touch-action: manipulation;
+		user-select: none;
+		-webkit-user-select: none;
+		transition: background 0.15s ease, transform 0.1s ease;
+	}
+
+	.touch-btn:active {
+		background: var(--accent);
+		color: white;
+		transform: scale(0.93);
+	}
+
+	.touch-btn--accent {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	.touch-btn--accent:active {
+		background: var(--accent);
+		color: white;
 	}
 
 	.controls-hint {
