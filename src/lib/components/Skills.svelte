@@ -4,6 +4,47 @@
 
 	let visible = $state(false);
 
+	// Element refs for drag
+	let backendInner:  HTMLElement | null = null;
+	let frontendInner: HTMLElement | null = null;
+
+	// Drag state (imperative, no reactivity needed)
+	const drag = {
+		active: false,
+		startX: 0,
+		originTx: 0,
+		el: null as HTMLElement | null
+	};
+
+	function getTranslateX(el: HTMLElement): number {
+		return new DOMMatrix(window.getComputedStyle(el).transform).m41;
+	}
+
+	function startDrag(e: MouseEvent, el: HTMLElement | null) {
+		if (!el || e.button !== 0) return;
+		e.preventDefault();
+		const tx = getTranslateX(el);
+		el.style.animationPlayState = 'paused';
+		el.style.transform = `translateX(${tx}px)`;
+		drag.active    = true;
+		drag.startX    = e.clientX;
+		drag.originTx  = tx;
+		drag.el        = el;
+	}
+
+	function onDragMove(e: MouseEvent) {
+		if (!drag.active || !drag.el) return;
+		drag.el.style.transform = `translateX(${drag.originTx + (e.clientX - drag.startX)}px)`;
+	}
+
+	function endDrag() {
+		if (!drag.active || !drag.el) return;
+		drag.el.style.animationPlayState = '';
+		drag.el.style.transform = '';
+		drag.active = false;
+		drag.el     = null;
+	}
+
 	onMount(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -16,6 +57,15 @@
 		);
 		const section = document.getElementById('tech-stack');
 		if (section) observer.observe(section);
+
+		document.addEventListener('mousemove', onDragMove);
+		document.addEventListener('mouseup',   endDrag);
+
+		return () => {
+			observer.disconnect();
+			document.removeEventListener('mousemove', onDragMove);
+			document.removeEventListener('mouseup',   endDrag);
+		};
 	});
 
 	const backendBase  = ['PHP', 'Laravel', 'Node.js', 'MySQL', 'Python', 'Java', 'PostgreSQL', 'REST APIs'];
@@ -50,8 +100,8 @@
 				<span class="band-number">01</span>
 				<span class="band-label">Backend</span>
 			</div>
-			<div class="marquee">
-				<div class="marquee__inner">
+			<div class="marquee" role="region" aria-label="Backend skills" onmousedown={(e) => startDrag(e, backendInner)}>
+				<div class="marquee__inner" bind:this={backendInner}>
 					{#each backendItems as item}
 						<span
 							class="marquee__item"
@@ -70,8 +120,8 @@
 				<span class="band-number">02</span>
 				<span class="band-label">Frontend & Tools</span>
 			</div>
-			<div class="marquee marquee--reverse">
-				<div class="marquee__inner">
+			<div class="marquee marquee--reverse" role="region" aria-label="Frontend and tools skills" onmousedown={(e) => startDrag(e, frontendInner)}>
+				<div class="marquee__inner" bind:this={frontendInner}>
 					{#each frontendItems as item}
 						<span
 							class="marquee__item"
@@ -157,6 +207,7 @@
 
 	.marquee {
 		overflow: hidden;
+		cursor: grab;
 		width: 100%;
 		mask-image: linear-gradient(
 			to right,
@@ -172,6 +223,10 @@
 			black calc(100% - 80px),
 			transparent
 		);
+	}
+
+	.marquee:active {
+		cursor: grabbing;
 	}
 
 	.marquee:hover .marquee__inner {
