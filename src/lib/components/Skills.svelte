@@ -10,10 +10,11 @@
 
 	// Drag state (imperative, no reactivity needed)
 	const drag = {
-		active: false,
-		startX: 0,
-		originTx: 0,
-		el: null as HTMLElement | null
+		active:    false,
+		startX:    0,
+		originTx:  0,
+		isReverse: false,
+		el:        null as HTMLElement | null
 	};
 
 	function getTranslateX(el: HTMLElement): number {
@@ -24,23 +25,47 @@
 		if (!el || e.button !== 0) return;
 		e.preventDefault();
 		const tx = getTranslateX(el);
-		el.style.animationPlayState = 'paused';
-		el.style.transform = `translateX(${tx}px)`;
+
+		// Must set animationName = 'none' — paused animations still win
+		// the transform cascade over inline styles.
+		el.style.animationName = 'none';
+		el.style.transform     = `translateX(${tx}px)`;
+
 		drag.active    = true;
 		drag.startX    = e.clientX;
 		drag.originTx  = tx;
+		drag.isReverse = !!el.parentElement?.classList.contains('marquee--reverse');
 		drag.el        = el;
 	}
 
 	function onDragMove(e: MouseEvent) {
 		if (!drag.active || !drag.el) return;
-		drag.el.style.transform = `translateX(${drag.originTx + (e.clientX - drag.startX)}px)`;
+		drag.el.style.transform =
+			`translateX(${drag.originTx + (e.clientX - drag.startX)}px)`;
 	}
 
 	function endDrag() {
 		if (!drag.active || !drag.el) return;
-		drag.el.style.animationPlayState = '';
-		drag.el.style.transform = '';
+		const el        = drag.el;
+		const currentTx = getTranslateX(el);
+		const halfWidth = el.scrollWidth / 2;
+		const duration  = drag.isReverse ? 36 : 32;
+
+		// Calculate animation-delay so the animation resumes exactly from
+		// the drag-release position (negative delay = start mid-cycle).
+		let progress: number;
+		if (drag.isReverse) {
+			// keyframes: from translateX(-50%) to translateX(0)
+			progress = ((currentTx + halfWidth) / halfWidth % 1 + 1) % 1;
+		} else {
+			// keyframes: from translateX(0) to translateX(-50%)
+			progress = ((-currentTx / halfWidth) % 1 + 1) % 1;
+		}
+
+		el.style.transform      = '';
+		el.style.animationDelay = `${-(progress * duration)}s`;
+		el.style.animationName  = '';
+
 		drag.active = false;
 		drag.el     = null;
 	}
@@ -100,6 +125,7 @@
 				<span class="band-number">01</span>
 				<span class="band-label">Backend</span>
 			</div>
+			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 			<div class="marquee" role="region" aria-label="Backend skills" onmousedown={(e) => startDrag(e, backendInner)}>
 				<div class="marquee__inner" bind:this={backendInner}>
 					{#each backendItems as item}
@@ -120,6 +146,7 @@
 				<span class="band-number">02</span>
 				<span class="band-label">Frontend & Tools</span>
 			</div>
+			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 			<div class="marquee marquee--reverse" role="region" aria-label="Frontend and tools skills" onmousedown={(e) => startDrag(e, frontendInner)}>
 				<div class="marquee__inner" bind:this={frontendInner}>
 					{#each frontendItems as item}
