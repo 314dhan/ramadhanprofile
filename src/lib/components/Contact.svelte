@@ -20,9 +20,19 @@
 	<div class="container">
 		<div class="row mb-5">
 			<div class="col-lg-8">
-				<span class="section-label">Get in Touch</span>
-				<h2 class="mt-3">{$t('contact_title')}</h2>
-				<p class="text-muted mt-3">{$t('contact_subtitle')}</p>
+				<div class="section-eyebrow">
+					<span class="section-eyebrow__num">05</span>
+					<span class="section-eyebrow__rule"></span>
+					<span class="section-eyebrow__text">Get in Touch</span>
+				</div>
+				<div class="contact-heading-row mt-2">
+					<h2 class="contact-h2 mt-0">{$t('contact_title')}</h2>
+					<span class="available-badge">
+						<span class="avail-dot"></span>
+						Available
+					</span>
+				</div>
+				<p class="contact-lead mt-3">{$t('contact_subtitle')}</p>
 			</div>
 		</div>
 
@@ -66,12 +76,50 @@
 		padding: var(--space-12) 0;
 	}
 
-	.section-label {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--accent);
+	.contact-heading-row {
+		display: flex;
+		align-items: flex-end;
+		gap: var(--space-4);
+		flex-wrap: wrap;
+	}
+
+	.contact-h2 {
+		margin-bottom: 0;
+	}
+
+	.available-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.6875rem;
 		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: oklch(72% 0.18 145);
+		padding-bottom: 0.375rem;
+		white-space: nowrap;
+	}
+
+	.avail-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: oklch(72% 0.18 145);
+		box-shadow: 0 0 6px oklch(72% 0.18 145 / 0.5);
+		animation: pulse-dot 2s ease-in-out infinite;
+		flex-shrink: 0;
+	}
+
+	@keyframes pulse-dot {
+		0%, 100% { opacity: 1; transform: scale(1); }
+		50% { opacity: 0.5; transform: scale(0.8); }
+	}
+
+	.contact-lead {
+		font-size: 1rem;
+		color: var(--text-muted);
+		line-height: 1.7;
+		max-width: 520px;
 	}
 
 	.contact-grid {

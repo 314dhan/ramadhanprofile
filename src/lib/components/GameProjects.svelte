@@ -26,8 +26,12 @@
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">
-				<span class="section-label">Roblox Creations</span>
-				<h2 class="mt-3">{$t('my_game_projects_title')}</h2>
+				<div class="section-eyebrow">
+					<span class="section-eyebrow__num">04</span>
+					<span class="section-eyebrow__rule"></span>
+					<span class="section-eyebrow__text">Roblox Creations</span>
+				</div>
+				<h2 class="mt-0">{$t('my_game_projects_title')}</h2>
 			</div>
 			<div class="col-lg-4 text-lg-right">
 				<p class="text-muted">{$t('my_game_projects_subtitle')}</p>
@@ -67,14 +71,6 @@
 	#game-projects {
 		background: var(--bg);
 		padding: var(--space-12) 0;
-	}
-
-	.section-label {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--accent);
-		font-weight: 700;
 	}
 
 	.games-grid {

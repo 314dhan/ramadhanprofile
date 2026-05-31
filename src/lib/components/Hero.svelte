@@ -236,7 +236,6 @@
 	/* Tech badge strip */
 	.tech-badges {
 		display: flex;
-		wrap: nowrap;
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: 0.5rem;
@@ -330,6 +329,26 @@
 	}
 
 	@media (max-width: 768px) {
-		.tech-badges { display: none; }
+		.tech-badges {
+			justify-content: flex-start;
+			flex-wrap: nowrap;
+			overflow-x: auto;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+			padding: 0 var(--space-3);
+			margin-left: calc(-1 * var(--space-3));
+			margin-right: calc(-1 * var(--space-3));
+		}
+
+		.tech-badges::-webkit-scrollbar {
+			display: none;
+		}
+
+		.tech-badge {
+			font-size: 0.625rem;
+			padding: 0.25rem 0.7rem;
+			flex-shrink: 0;
+		}
 	}
 </style>

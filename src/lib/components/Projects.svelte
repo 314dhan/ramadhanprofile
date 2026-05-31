@@ -37,8 +37,12 @@
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">
-				<span class="section-label">Selected Works</span>
-				<h2 class="mt-3">{$t('my_projects_title')}</h2>
+				<div class="section-eyebrow">
+					<span class="section-eyebrow__num">03</span>
+					<span class="section-eyebrow__rule"></span>
+					<span class="section-eyebrow__text">Selected Works</span>
+				</div>
+				<h2 class="mt-0">{$t('my_projects_title')}</h2>
 			</div>
 			<div class="col-lg-4 text-lg-right">
 				<p class="text-muted">{$t('my_projects_subtitle')}</p>

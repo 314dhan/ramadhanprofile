@@ -3,75 +3,92 @@
 	import { onMount } from 'svelte';
 
 	let visible = $state(false);
+
 	onMount(() => {
-		const observer = new IntersectionObserver((entries) => {
-			if (entries[0].isIntersecting) {
-				visible = true;
-				observer.disconnect();
-			}
-		}, { threshold: 0.1 });
-		
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					visible = true;
+					observer.disconnect();
+				}
+			},
+			{ threshold: 0.1 }
+		);
 		const section = document.getElementById('tech-stack');
 		if (section) observer.observe(section);
 	});
 
-	const skillCategories = [
-		{
-			title: 'Backend',
-			skills: [
-				{ name: 'php_skill', icon: 'fab fa-php' },
-				{ name: 'laravel_skill', icon: 'fab fa-laravel' },
-				{ name: 'nodejs_skill', icon: 'fab fa-node-js' },
-				{ name: 'db_skill', icon: 'fas fa-database' },
-				{ name: 'python_skill', icon: 'fab fa-python' },
-				{ name: 'java_skill', icon: 'fab fa-java' }
-			]
-		},
-		{
-			title: 'Frontend & Others',
-			skills: [
-				{ name: 'js_skill', icon: 'fab fa-js' },
-				{ name: 'react_skill', icon: 'fab fa-react' },
-				{ name: 'vuejs_skill', icon: 'fab fa-vuejs' },
-				{ name: 'flutter_skill', icon: 'fas fa-mobile-alt' },
-				{ name: 'dart_skill', icon: 'fas fa-bullseye' },
-				{ name: 'lua_skill', icon: 'fas fa-file-code' },
-				{ name: 'mobile_skill', icon: 'fas fa-mobile-alt' }
-			]
-		}
-	];
+	const backendBase  = ['PHP', 'Laravel', 'Node.js', 'MySQL', 'Python', 'Java', 'PostgreSQL', 'REST APIs'];
+	const frontendBase = ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'Svelte', 'Flutter', 'Dart', 'Lua', 'CSS'];
+
+	// Duplicate for seamless -50% loop; bake alternating style into data
+	const backendItems  = [...backendBase,  ...backendBase ].map((name, i) => ({ name, outline: i % 2 !== 0 }));
+	const frontendItems = [...frontendBase, ...frontendBase].map((name, i) => ({ name, outline: i % 2 !== 0 }));
 </script>
 
 <section id="tech-stack" class:visible>
 	<div class="container">
-		<div class="row mb-5">
-			<div class="col-lg-8">
-				<span class="section-label">Expertise</span>
-				<h2 class="mt-3">{$t('my_skills_title')}</h2>
-				<p class="text-muted mt-3">{$t('my_skills_subtitle')}</p>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="section-eyebrow">
+					<span class="section-eyebrow__num">02</span>
+					<span class="section-eyebrow__rule"></span>
+					<span class="section-eyebrow__text">Expertise</span>
+				</div>
+				<h2 class="mt-0">{$t('my_skills_title')}</h2>
+			</div>
+			<div class="col-lg-5 offset-lg-1 d-flex align-items-end">
+				<p class="intro-text">{$t('my_skills_subtitle')}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="bands {visible ? 'bands--visible' : ''}">
+		<!-- Backend band -->
+		<div class="band">
+			<div class="container band-meta">
+				<span class="band-number">01</span>
+				<span class="band-label">Backend</span>
+			</div>
+			<div class="marquee">
+				<div class="marquee__inner">
+					{#each backendItems as item}
+						<span
+							class="marquee__item"
+							class:marquee__item--outline={item.outline}
+							aria-hidden="true"
+						>{item.name}</span>
+						<span class="marquee__sep" aria-hidden="true">◆</span>
+					{/each}
+				</div>
 			</div>
 		</div>
 
-		<div class="skills-container">
-			{#each skillCategories as category, catIndex}
-				<div class="skill-category {visible ? 'fade-in-up' : ''}" style="animation-delay: {catIndex * 0.2}s">
-					<h3 class="category-title">{category.title}</h3>
-					<div class="skills-grid">
-						{#each category.skills as skill}
-							<div class="skill-item">
-								<div class="skill-icon">
-									<i class={skill.icon}></i>
-								</div>
-								<div class="skill-info">
-									<h4 class="skill-name">{$t(skill.name)}</h4>
-									<p class="skill-desc">{$t(skill.name + '_desc')}</p>
-								</div>
-							</div>
-						{/each}
-					</div>
+		<!-- Frontend & Tools band (reverse) -->
+		<div class="band">
+			<div class="container band-meta">
+				<span class="band-number">02</span>
+				<span class="band-label">Frontend & Tools</span>
+			</div>
+			<div class="marquee marquee--reverse">
+				<div class="marquee__inner">
+					{#each frontendItems as item}
+						<span
+							class="marquee__item"
+							class:marquee__item--outline={item.outline}
+							aria-hidden="true"
+						>{item.name}</span>
+						<span class="marquee__sep" aria-hidden="true">◆</span>
+					{/each}
 				</div>
-			{/each}
+			</div>
 		</div>
+	</div>
+
+	<!-- Accessible text list, visually hidden -->
+	<div class="sr-only">
+		<p>Backend skills: {backendBase.join(', ')}</p>
+		<p>Frontend and tools: {frontendBase.join(', ')}</p>
 	</div>
 </section>
 
@@ -79,93 +96,164 @@
 	#tech-stack {
 		background: var(--surface);
 		padding: var(--space-12) 0;
+		overflow: hidden;
 	}
 
-	.section-label {
-		font-size: 0.75rem;
+	.intro-text {
+		color: var(--text-muted);
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		margin: 0;
+		padding-bottom: 0.25rem;
+	}
+
+	/* ── Bands ──────────────────────────────── */
+
+	.bands {
+		margin-top: var(--space-8);
+		opacity: 0;
+		transform: translateY(16px);
+		transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.bands--visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.band {
+		border-top: 1px solid var(--border);
+		padding: var(--space-4) 0;
+	}
+
+	.band:last-child {
+		border-bottom: 1px solid var(--border);
+	}
+
+	.band-meta {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-3);
+		margin-bottom: var(--space-3);
+	}
+
+	.band-number {
+		font-family: 'Fraunces', serif;
+		font-size: 0.6875rem;
+		font-weight: 600;
+		color: var(--text-dim);
+		letter-spacing: 0.12em;
+	}
+
+	.band-label {
+		font-size: 0.6875rem;
+		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
-		color: var(--accent);
-		font-weight: 700;
-	}
-
-	.skills-container {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-8);
-	}
-
-	.category-title {
-		font-family: 'Fraunces', serif;
-		font-size: 1.25rem;
-		color: var(--text-dim);
-		margin-bottom: var(--space-6);
-		padding-bottom: var(--space-2);
-		border-bottom: 1px solid var(--border);
-		display: inline-block;
-	}
-
-	.skills-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--space-6) var(--space-8);
-	}
-
-	.skill-item {
-		display: flex;
-		gap: var(--space-4);
-		transition: transform 0.3s ease;
-	}
-
-	.skill-item:hover {
-		transform: translateX(8px);
-	}
-
-	.skill-icon {
-		font-size: 1.5rem;
-		color: var(--accent);
-		margin-top: 0.25rem;
-		opacity: 0.8;
-		transition: all 0.3s ease;
-	}
-
-	.skill-item:hover .skill-icon {
-		opacity: 1;
-		transform: scale(1.1);
-	}
-
-	.skill-name {
-		font-size: 1rem;
-		font-weight: 600;
-		color: var(--text-main);
-		margin-bottom: 0.25rem;
-	}
-
-	.skill-desc {
-		font-size: 0.8125rem;
 		color: var(--text-muted);
-		line-height: 1.5;
 	}
 
-	.fade-in-up {
-		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-		opacity: 0;
+	/* ── Marquee ────────────────────────────── */
+
+	.marquee {
+		overflow: hidden;
+		width: 100%;
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			black 80px,
+			black calc(100% - 80px),
+			transparent
+		);
+		-webkit-mask-image: linear-gradient(
+			to right,
+			transparent,
+			black 80px,
+			black calc(100% - 80px),
+			transparent
+		);
 	}
 
-	@keyframes fadeInUp {
-		from { opacity: 0; transform: translateY(30px); }
-		to { opacity: 1; transform: translateY(0); }
+	.marquee:hover .marquee__inner {
+		animation-play-state: paused;
 	}
 
-	@media (max-width: 991px) {
-		.skills-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	.marquee__inner {
+		display: flex;
+		align-items: center;
+		width: max-content;
+		animation: scroll-fwd 32s linear infinite;
 	}
 
-	@media (max-width: 576px) {
-		.skills-grid {
-			grid-template-columns: 1fr;
-		}
+	.marquee--reverse .marquee__inner {
+		animation-name: scroll-rev;
+		animation-duration: 36s;
+	}
+
+	@keyframes scroll-fwd {
+		from { transform: translateX(0); }
+		to   { transform: translateX(-50%); }
+	}
+
+	@keyframes scroll-rev {
+		from { transform: translateX(-50%); }
+		to   { transform: translateX(0); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee__inner { animation: none; }
+	}
+
+	/* ── Items ──────────────────────────────── */
+
+	.marquee__item {
+		display: inline-block;
+		padding: 0.25rem 1.5rem;
+		font-size: 1.25rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		white-space: nowrap;
+		user-select: none;
+		color: var(--text-main);
+		transition: color 0.25s ease;
+		cursor: default;
+	}
+
+	.marquee__item:hover:not(.marquee__item--outline) {
+		color: var(--accent);
+	}
+
+	/* Outlined variant */
+	.marquee__item--outline {
+		color: transparent;
+		-webkit-text-stroke: 1.5px oklch(45% 0.02 260 / 0.55);
+		transition: -webkit-text-stroke-color 0.25s ease;
+	}
+
+	.marquee__item--outline:hover {
+		-webkit-text-stroke-color: var(--accent);
+	}
+
+	/* Separator diamond */
+	.marquee__sep {
+		font-size: 0.35rem;
+		color: var(--accent);
+		opacity: 0.35;
+		user-select: none;
+		padding: 0 0.25rem;
+		vertical-align: middle;
+	}
+
+	/* Screen-reader list */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>

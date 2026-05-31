@@ -24,14 +24,24 @@
 		});
 	}
 
+	function handleOutsideClick(e: MouseEvent) {
+		if (!isLangMenuOpen) return;
+		const switcher = document.querySelector('.language-switcher');
+		if (switcher && !switcher.contains(e.target as Node)) {
+			isLangMenuOpen = false;
+		}
+	}
+
 	onMount(() => {
 		window.addEventListener('scroll', handleScroll);
+		document.addEventListener('click', handleOutsideClick);
 		handleScroll();
 	});
 
 	onDestroy(() => {
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('scroll', handleScroll);
+			document.removeEventListener('click', handleOutsideClick);
 		}
 	});
 

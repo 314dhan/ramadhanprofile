@@ -23,6 +23,7 @@
 
 	let visible = $state(false);
 	let githubStats = $state<GitHubStats | null>(null);
+	let githubLoading = $state(true);
 
 	onMount(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -50,7 +51,11 @@
 				.map(([name, count]) => ({ name, percent: Math.round((count / total) * 100) }));
 
 			githubStats = { repos: user.public_repos, followers: user.followers, avatar: user.avatar_url, topLangs };
-		}).catch(() => { githubStats = null; });
+		}).catch(() => {
+			githubStats = null;
+		}).finally(() => {
+			githubLoading = false;
+		});
 	});
 </script>
 
@@ -105,7 +110,23 @@
 					</a>
 				</div>
 
-				{#if githubStats}
+				{#if githubLoading}
+				<div class="gh-skeleton mt-5" aria-label="Loading GitHub profile" aria-busy="true">
+					<div class="skel-header">
+						<div class="skel-circle"></div>
+						<div class="skel-lines">
+							<div class="skel-line skel-line--name"></div>
+							<div class="skel-line skel-line--meta"></div>
+						</div>
+					</div>
+					<div class="skel-bar"></div>
+					<div class="skel-legend">
+						<div class="skel-line skel-line--xs"></div>
+						<div class="skel-line skel-line--xs"></div>
+						<div class="skel-line skel-line--xs"></div>
+					</div>
+				</div>
+				{:else if githubStats}
 				<div class="gh-card mt-5 {visible ? 'fade-in-right' : ''}">
 					<div class="gh-header">
 						<img src={githubStats.avatar} alt="GitHub avatar" class="gh-avatar" />
@@ -143,6 +164,13 @@
 						</div>
 					</div>
 					{/if}
+				</div>
+				{:else}
+				<div class="gh-fallback mt-5">
+					<a href="https://github.com/314dhan" target="_blank" rel="noopener" class="gh-view-btn">
+						<i class="fab fa-github"></i>
+						View GitHub Profile <i class="fas fa-external-link-alt"></i>
+					</a>
 				</div>
 				{/if}
 			</div>
@@ -269,6 +297,73 @@
 		to { opacity: 1; transform: translateX(0); }
 	}
 
+	/* ── GitHub skeleton ─────────────────────────── */
+	.gh-skeleton {
+		border: 1px solid var(--border);
+		background: var(--surface);
+		padding: var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+
+	.skel-header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+	}
+
+	.skel-circle {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--surface-bright);
+		flex-shrink: 0;
+		animation: shimmer 1.6s ease-in-out infinite;
+	}
+
+	.skel-lines {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		flex: 1;
+	}
+
+	.skel-line {
+		height: 10px;
+		border-radius: 2px;
+		background: var(--surface-bright);
+		animation: shimmer 1.6s ease-in-out infinite;
+	}
+
+	.skel-line--name { width: 100px; }
+	.skel-line--meta { width: 160px; animation-delay: 0.1s; }
+	.skel-line--xs   { width: 55px;  animation-delay: 0.2s; }
+
+	.skel-bar {
+		height: 8px;
+		border-radius: 4px;
+		background: var(--surface-bright);
+		animation: shimmer 1.6s ease-in-out infinite;
+		animation-delay: 0.15s;
+	}
+
+	.skel-legend {
+		display: flex;
+		gap: var(--space-4);
+	}
+
+	@keyframes shimmer {
+		0%, 100% { opacity: 0.35; }
+		50%       { opacity: 0.7; }
+	}
+
+	/* ── GitHub fallback (API error) ──────────────── */
+	.gh-fallback {
+		display: flex;
+	}
+
+	/* ── GitHub card ──────────────────────────────── */
 	.gh-card {
 		opacity: 0;
 		border: 1px solid var(--border);

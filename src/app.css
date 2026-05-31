@@ -105,7 +105,7 @@ h3 { font-size: 1.75rem; margin-bottom: var(--space-3); }
 /* Remove default AI-purple gradient lines */
 h2::after { display: none; }
 
-/* Section label treatment */
+/* Section label — used in Hero / About / Skills */
 .section-label {
 	font-size: 0.7rem;
 	text-transform: uppercase;
@@ -113,6 +113,34 @@ h2::after { display: none; }
 	color: var(--accent);
 	font-weight: 700;
 	display: block;
+}
+
+/* Numbered eyebrow — used in Projects / GameProjects / Contact */
+.section-eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: var(--space-3);
+}
+.section-eyebrow__num {
+	font-family: 'Fraunces', serif;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	color: var(--text-dim);
+	letter-spacing: 0.08em;
+}
+.section-eyebrow__rule {
+	width: 28px;
+	height: 1px;
+	background: var(--border-bright);
+	flex-shrink: 0;
+}
+.section-eyebrow__text {
+	font-size: 0.6875rem;
+	text-transform: uppercase;
+	letter-spacing: 0.25em;
+	color: var(--accent);
+	font-weight: 700;
 }
 
 /* Refined Navbar */
