@@ -16,8 +16,8 @@
 	});
 
 	const projects = [
-		{ id: 4, img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80', url: 'https://314dhan.github.io/tinpets/', tags: ['HTML', 'CSS', 'JS'] },
-		{ id: 5, img: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=800&q=80', url: 'https://linkshortener-chi.vercel.app/', tags: ['NodeJS', 'JS'] },
+		{ id: 4, img: '/images/tinpets.png', url: 'https://314dhan.github.io/tinpets/', tags: ['HTML', 'CSS', 'JS'] },
+		{ id: 5, img: '/images/urlsortener.png', url: 'https://linkshortener-chi.vercel.app/', tags: ['NodeJS', 'JS'] },
 		{ id: 6, img: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=800&q=80', url: 'https://chat-app-messaging-gamma.vercel.app/', tags: ['Vue', 'NodeJS'] },
 		{ id: 7, img: '/images/kanji-flash-card-projecto.png', url: 'https://kanji-flash-card-project.vercel.app/', tags: ['JS', 'CSS'] },
 		{ id: 8, img: '/images/sswfood.png', url: 'https://ssw-foodfactory.vercel.app/', tags: ['HTML', 'CSS'] },
