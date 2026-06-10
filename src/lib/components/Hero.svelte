@@ -104,7 +104,7 @@
 
 				<!-- Floating tech badges -->
 				<div class="tech-badges {visible ? 'fade-in delay-4' : ''}">
-					{#each ['PHP', 'Laravel', 'Flutter', 'Node.js', 'Python'] as tech, i}
+					{#each ['PHP', 'Laravel', 'Flutter', 'Node.js', 'Python', 'Java', 'C++'] as tech, i}
 						<span class="tech-badge" style="animation-delay: {0.6 + i * 0.1}s">{tech}</span>
 					{/each}
 				</div>
@@ -344,25 +344,12 @@
 
 	@media (max-width: 768px) {
 		.tech-badges {
-			justify-content: flex-start;
-			flex-wrap: nowrap;
-			overflow-x: auto;
-			overflow-y: hidden;
-			-webkit-overflow-scrolling: touch;
-			scrollbar-width: none;
-			padding: 0 var(--space-3);
-			margin-left: calc(-1 * var(--space-3));
-			margin-right: calc(-1 * var(--space-3));
-		}
-
-		.tech-badges::-webkit-scrollbar {
-			display: none;
+			justify-content: center;
 		}
 
 		.tech-badge {
 			font-size: 0.625rem;
 			padding: 0.25rem 0.7rem;
-			flex-shrink: 0;
 		}
 	}
 </style>

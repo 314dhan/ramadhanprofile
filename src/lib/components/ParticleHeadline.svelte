@@ -28,7 +28,7 @@
 
 	onMount(() => {
 		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (reduced || window.innerWidth < 768) return;
+		if (reduced) return;
 
 		const ctx = canvasEl.getContext('2d');
 		if (!ctx) return;
@@ -107,6 +107,7 @@
 			octx.fillText(line2, boxW / 2, top + lineH * 1.5);
 
 			const data = octx.getImageData(0, 0, boxW, boxH).data;
+			const maxCount = window.innerWidth < 768 ? 1200 : TARGET_COUNT;
 			let step = 3;
 			let homes: { x: number; y: number; line: number }[] = [];
 			for (; step < 12; step++) {
@@ -119,7 +120,7 @@
 						}
 					}
 				}
-				if (homes.length <= TARGET_COUNT * 1.3) break;
+				if (homes.length <= maxCount * 1.3) break;
 			}
 			return homes.length > 50 ? { homes } : null;
 		}
@@ -284,11 +285,6 @@
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(() => {
 				if (!active) return;
-				if (window.innerWidth < 768) {
-					active = false;
-					stop();
-					return;
-				}
 				sizeCanvas();
 				const sampled = sampleText();
 				if (sampled) {
