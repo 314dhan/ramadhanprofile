@@ -60,6 +60,7 @@
 </script>
 
 <section id="about" class:visible>
+	<span class="ghost-num ghost-num--right" aria-hidden="true">01</span>
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-5 mb-5 mb-lg-0 {visible ? 'fade-in-left' : ''}">

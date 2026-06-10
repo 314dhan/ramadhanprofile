@@ -143,6 +143,60 @@ h2::after { display: none; }
 	font-weight: 700;
 }
 
+/* ─── Ghost section numerals (scroll-parallax) ─────────────────────────── */
+section:has(> .ghost-num) {
+	overflow: clip;
+}
+
+section:has(> .ghost-num) > .container {
+	position: relative;
+	z-index: 1;
+}
+
+.ghost-num {
+	position: absolute;
+	top: calc(50% - 0.5em);
+	font-family: 'Fraunces', serif;
+	font-size: clamp(10rem, 24vw, 22rem);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: -0.02em;
+	color: oklch(50% 0.02 260 / 0.04);
+	-webkit-text-stroke: 1px oklch(45% 0.03 260 / 0.22);
+	pointer-events: none;
+	user-select: none;
+	z-index: 0;
+}
+
+:root.light-theme .ghost-num {
+	color: oklch(50% 0.02 260 / 0.03);
+	-webkit-text-stroke: 1px oklch(60% 0.03 260 / 0.25);
+}
+
+.ghost-num--right { right: -0.06em; }
+.ghost-num--left  { left:  -0.06em; }
+
+@supports (animation-timeline: view()) {
+	.ghost-num {
+		animation: ghost-drift linear both;
+		animation-timeline: view();
+		animation-range: entry 0% exit 100%;
+	}
+
+	@keyframes ghost-drift {
+		from { transform: translateY(10rem); }
+		to   { transform: translateY(-10rem); }
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ghost-num { animation: none; }
+}
+
+@media (max-width: 768px) {
+	.ghost-num { font-size: clamp(8rem, 32vw, 12rem); }
+}
+
 /* Refined Navbar */
 .navbar {
 	background: transparent;

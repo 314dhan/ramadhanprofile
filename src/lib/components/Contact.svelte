@@ -17,6 +17,7 @@
 </script>
 
 <section id="contact" class:visible>
+	<span class="ghost-num ghost-num--right" aria-hidden="true">05</span>
 	<div class="container">
 		<div class="row mb-5">
 			<div class="col-lg-8">

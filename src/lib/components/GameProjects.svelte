@@ -23,6 +23,7 @@
 </script>
 
 <section id="game-projects" class:visible>
+	<span class="ghost-num ghost-num--left" aria-hidden="true">04</span>
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">
@@ -97,6 +98,24 @@
 		overflow: hidden;
 		background: var(--surface);
 		border-radius: 2px;
+	}
+
+	/* Scroll-driven wipe reveal; browsers without scroll timelines keep the fade-in-up */
+	@supports (animation-timeline: view()) {
+		.image-container {
+			animation: img-wipe linear both;
+			animation-timeline: view();
+			animation-range: entry 10% entry 65%;
+		}
+	}
+
+	@keyframes img-wipe {
+		from { clip-path: inset(0 100% 0 0); }
+		to   { clip-path: inset(0 0 0 0); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.image-container { animation: none; }
 	}
 
 	.image-container img {

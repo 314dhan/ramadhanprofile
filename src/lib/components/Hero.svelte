@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { t } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
+	import ParticleField from '$lib/components/ParticleField.svelte';
+	import ParticleHeadline from '$lib/components/ParticleHeadline.svelte';
 
 	let visible = $state(false);
+	let fieldActive = $state(false);
 	let mouseX = $state(0);
 	let mouseY = $state(0);
 	let clicks = $state<{ x: number; y: number; id: number }[]>([]);
@@ -54,8 +57,9 @@
 	></div>
 
 
-	<!-- Decorative grid -->
-	<div class="hero-grid" aria-hidden="true"></div>
+	<!-- 3D particle field (WebGL); dot grid is the fallback when it can't run -->
+	<ParticleField onstatus={(ok) => (fieldActive = ok)} />
+	<div class="hero-grid" class:hero-grid--off={fieldActive} aria-hidden="true"></div>
 
 	<!-- Click ripples -->
 	{#each clicks as click (click.id)}
@@ -75,10 +79,15 @@
 					<span>Available for work</span>
 				</div>
 
-				<h1 class="hero-title {visible ? 'fade-in-up delay-1' : ''}">
-					<span class="d-block mb-2">{$t('hero_title').split(' ')[0]}</span>
-					<span class="italic-accent">{$t('hero_title').split(' ').slice(1).join(' ')}</span>
-				</h1>
+				<ParticleHeadline
+					line1={$t('hero_title').split(' ')[0]}
+					line2={$t('hero_title').split(' ').slice(1).join(' ')}
+				>
+					<h1 class="hero-title {visible ? 'fade-in-up delay-1' : ''}">
+						<span class="d-block mb-2">{$t('hero_title').split(' ')[0]}</span>
+						<span class="italic-accent">{$t('hero_title').split(' ').slice(1).join(' ')}</span>
+					</h1>
+				</ParticleHeadline>
 				
 				<p class="hero-subtitle mt-4 {visible ? 'fade-in-up delay-2' : ''}">
 					{$t('hero_subtitle')}
@@ -133,7 +142,12 @@
 	}
 
 
-	/* Subtle dot-grid overlay */
+	/* Subtle dot-grid overlay (fallback when WebGL field is off) */
+	.hero-grid--off {
+		opacity: 0;
+		transition: opacity 0.8s ease;
+	}
+
 	.hero-grid {
 		position: absolute;
 		inset: 0;
