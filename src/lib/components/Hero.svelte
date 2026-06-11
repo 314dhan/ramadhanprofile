@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import ParticleField from '$lib/components/ParticleField.svelte';
 	import ParticleHeadline from '$lib/components/ParticleHeadline.svelte';
+	import OrbitalSystem from '$lib/components/OrbitalSystem.svelte';
 
 	let visible = $state(false);
 	let fieldActive = $state(false);
@@ -56,6 +57,9 @@
 		aria-hidden="true"
 	></div>
 
+
+	<!-- Orbital solar system (3D CSS) -->
+	<OrbitalSystem />
 
 	<!-- 3D particle field (WebGL); dot grid is the fallback when it can't run -->
 	<ParticleField onstatus={(ok) => (fieldActive = ok)} />
