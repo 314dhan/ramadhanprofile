@@ -98,10 +98,10 @@
 	}
 
 	.footer-logo {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 1.5rem;
-		font-weight: 800;
-		letter-spacing: 0.1em;
+		font-weight: 700;
+		letter-spacing: 0.12em;
 	}
 
 	.footer-logo span {
@@ -193,13 +193,5 @@
 		margin: 0;
 	}
 
-	.built-with {
-		font-size: 0.8125rem;
-		color: var(--text-dim);
-	}
 
-	.built-with .accent {
-		color: var(--accent);
-		font-weight: 600;
-	}
 </style>

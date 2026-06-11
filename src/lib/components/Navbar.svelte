@@ -158,10 +158,10 @@
 	}
 
 	.navbar-brand {
-		font-family: 'Fraunces', serif;
-		font-weight: 800;
+		font-family: 'Barlow Condensed', sans-serif;
+		font-weight: 700;
 		font-size: 1.25rem;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.12em;
 		color: var(--text-main) !important;
 	}
 

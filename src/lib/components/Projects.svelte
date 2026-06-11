@@ -38,11 +38,6 @@
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">
-				<div class="section-eyebrow">
-					<span class="section-eyebrow__num">03</span>
-					<span class="section-eyebrow__rule"></span>
-					<span class="section-eyebrow__text">Selected Works</span>
-				</div>
 				<h2 class="mt-0">{$t('my_projects_title')}</h2>
 			</div>
 			<div class="col-lg-4 text-lg-right">
@@ -81,7 +76,6 @@
 		<div class="ai-section {visible ? 'fade-in-up' : ''}" style="animation-delay: 0.4s">
 			<div class="row mb-4 align-items-end">
 				<div class="col-lg-8">
-					<span class="section-label">AI Tools</span>
 					<h3 class="ai-section-title mt-2">Python tools built with Claude AI</h3>
 				</div>
 			</div>
@@ -116,14 +110,6 @@
 </section>
 
 <style>
-	.section-label {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--accent);
-		font-weight: 700;
-	}
-
 	.projects-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -134,7 +120,6 @@
 		text-decoration: none;
 		color: inherit;
 		display: block;
-		opacity: 0;
 	}
 
 	.project-item:hover {
@@ -178,7 +163,7 @@
 	.image-overlay {
 		position: absolute;
 		inset: 0;
-		background: oklch(12% 0.1 260 / 0.2);
+		background: oklch(12% 0.1 200 / 0.2);
 		opacity: 1;
 		transition: opacity 0.6s ease;
 	}
@@ -193,7 +178,7 @@
 	}
 
 	.project-title {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 1.5rem;
 		margin-bottom: 0.5rem;
 		transition: color 0.3s ease;
@@ -218,7 +203,7 @@
 		font-size: 0.875rem;
 		transform: rotate(-45deg);
 		color: var(--text-dim);
-		transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+		transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.project-item:hover .arrow-icon {
@@ -243,7 +228,7 @@
 	}
 
 	.fade-in-up {
-		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	@keyframes fadeInUp {
@@ -252,14 +237,13 @@
 	}
 
 	.ai-section {
-		opacity: 0;
 		border-top: 1px solid var(--border);
 		padding-top: var(--space-8);
 		margin-top: var(--space-8);
 	}
 
 	.ai-section-title {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 1.5rem;
 		color: var(--text-muted);
 		font-weight: 400;
@@ -277,7 +261,6 @@
 		gap: var(--space-3);
 		text-decoration: none;
 		color: inherit;
-		opacity: 0;
 		padding: var(--space-4);
 		border: 1px solid var(--border);
 		background: var(--surface);

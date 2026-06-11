@@ -40,7 +40,7 @@ import { onMount, onDestroy } from 'svelte';
 </script>
 
 <div class="scroll-progress">
-	<div class="progress-fill" style="width: {scrollPercent}%"></div>
+	<div class="progress-fill" style="transform: scaleX({scrollPercent / 100})"></div>
 </div>
 
 <Navbar />
@@ -77,9 +77,11 @@ import { onMount, onDestroy } from 'svelte';
 	}
 
 	.progress-fill {
+		width: 100%;
 		height: 100%;
 		background: var(--accent);
-		transition: width 0.1s ease-out;
+		transform-origin: left;
+		transition: transform 0.1s ease-out;
 	}
 
 	.back-to-top-btn {

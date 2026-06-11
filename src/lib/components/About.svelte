@@ -75,7 +75,6 @@
 			</div>
 			
 			<div class="col-lg-6 offset-lg-1 {visible ? 'fade-in-right' : ''}">
-				<span class="section-label">Biography</span>
 				<h2 class="mt-3">{$t('about_me_title')}</h2>
 				
 				<div class="about-content mt-4">
@@ -182,20 +181,6 @@
 <style>
 	#about {
 		background: var(--bg);
-		opacity: 0;
-		transition: opacity 1s ease;
-	}
-
-	#about.visible {
-		opacity: 1;
-	}
-
-	.section-label {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--accent);
-		font-weight: 700;
 	}
 
 	.image-wrapper {
@@ -270,7 +255,7 @@
 		border: 1px solid var(--border);
 		border-radius: 50%;
 		margin-right: 12px;
-		transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+		transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.social-link:hover .link-icon {
@@ -281,11 +266,11 @@
 	}
 
 	.fade-in-left {
-		animation: fadeInLeft 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInLeft 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	.fade-in-right {
-		animation: fadeInRight 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInRight 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	@keyframes fadeInLeft {
@@ -366,7 +351,6 @@
 
 	/* ── GitHub card ──────────────────────────────── */
 	.gh-card {
-		opacity: 0;
 		border: 1px solid var(--border);
 		background: var(--surface);
 		padding: var(--space-4);
@@ -397,7 +381,7 @@
 	}
 
 	.gh-username {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 1rem;
 		font-weight: 600;
 		color: var(--text-main);

@@ -1,24 +1,24 @@
 /* Global Styles - Impeccable Framework Redesign */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,400;1,600&family=Barlow:wght@400;500;600&display=swap');
 
 :root {
-	/* OKLCH High-End Palette */
-	--bg: oklch(12% 0.015 260);
-	--surface: oklch(16% 0.02 260);
-	--surface-bright: oklch(22% 0.025 260);
-	
-	--text-main: oklch(92% 0.01 260);
-	--text-muted: oklch(65% 0.02 260);
-	--text-dim: oklch(45% 0.02 260);
-	
-	--accent: oklch(72% 0.14 260); /* Refined Indigo */
-	--accent-bright: oklch(80% 0.12 260);
+	/* OKLCH Palette — Cyan / Steel */
+	--bg: oklch(12% 0.01 200);
+	--surface: oklch(16% 0.015 200);
+	--surface-bright: oklch(22% 0.02 200);
 
-	--border: oklch(25% 0.02 260 / 0.4);
-	--border-bright: oklch(35% 0.03 260 / 0.6);
+	--text-main: oklch(92% 0.008 200);
+	--text-muted: oklch(65% 0.015 200);
+	--text-dim: oklch(45% 0.015 200);
 
-	--particle-dot: oklch(72% 0.14 260);
-	--particle-line: oklch(65% 0.02 260);
+	--accent: oklch(72% 0.15 200);
+	--accent-bright: oklch(80% 0.12 200);
+
+	--border: oklch(25% 0.015 200 / 0.4);
+	--border-bright: oklch(35% 0.025 200 / 0.6);
+
+	--particle-dot: oklch(72% 0.15 200);
+	--particle-line: oklch(65% 0.015 200);
 
 	/* Spacing Grid (8px base) */
 	--space-1: 0.25rem; /* 4px */
@@ -31,22 +31,22 @@
 }
 
 :root.light-theme {
-	--bg: oklch(98% 0.005 260);
-	--surface: oklch(95% 0.01 260);
-	--surface-bright: oklch(90% 0.015 260);
-	
-	--text-main: oklch(20% 0.015 260);
-	--text-muted: oklch(45% 0.02 260);
-	--text-dim: oklch(60% 0.02 260);
-	
-	--accent: oklch(60% 0.18 260);
-	--accent-bright: oklch(50% 0.2 260);
+	--bg: oklch(98% 0.004 200);
+	--surface: oklch(95% 0.008 200);
+	--surface-bright: oklch(90% 0.012 200);
 
-	--border: oklch(85% 0.01 260);
-	--border-bright: oklch(75% 0.02 260);
+	--text-main: oklch(18% 0.01 200);
+	--text-muted: oklch(42% 0.015 200);
+	--text-dim: oklch(58% 0.015 200);
 
-	--particle-dot: oklch(45% 0.22 25);
-	--particle-line: oklch(28% 0.18 25);
+	--accent: oklch(52% 0.2 200);
+	--accent-bright: oklch(44% 0.22 200);
+
+	--border: oklch(83% 0.008 200);
+	--border-bright: oklch(73% 0.015 200);
+
+	--particle-dot: oklch(42% 0.22 200);
+	--particle-line: oklch(28% 0.18 200);
 }
 
 /* ─── Custom Cursor (desktop only) ─────────────────────────────────────── */
@@ -73,16 +73,15 @@
 		width: 32px;
 		height: 32px;
 		border-radius: 50%;
-		border: 1px solid oklch(72% 0.14 260 / 0.4);
-		transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-				height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+		border: 1px solid oklch(72% 0.15 200 / 0.4);
+		transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
 				opacity 0.3s ease,
-				transform 0.12s linear;
+				scale 0.12s linear;
 	}
 }
 
 body {
-	font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+	font-family: 'Barlow', -apple-system, sans-serif;
 	background-color: var(--bg);
 	color: var(--text-main);
 	line-height: 1.6;
@@ -92,9 +91,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Fraunces', serif;
-	font-weight: 600;
-	letter-spacing: -0.02em;
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 700;
+	letter-spacing: -0.01em;
 	color: var(--text-main);
 }
 
@@ -111,43 +110,6 @@ h3 { font-size: 1.75rem; margin-bottom: var(--space-3); }
 /* Remove default AI-purple gradient lines */
 h2::after { display: none; }
 
-/* Section label — used in Hero / About / Skills */
-.section-label {
-	font-size: 0.7rem;
-	text-transform: uppercase;
-	letter-spacing: 0.25em;
-	color: var(--accent);
-	font-weight: 700;
-	display: block;
-}
-
-/* Numbered eyebrow — used in Projects / GameProjects / Contact */
-.section-eyebrow {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	margin-bottom: var(--space-3);
-}
-.section-eyebrow__num {
-	font-family: 'Fraunces', serif;
-	font-size: 0.6875rem;
-	font-weight: 600;
-	color: var(--text-dim);
-	letter-spacing: 0.08em;
-}
-.section-eyebrow__rule {
-	width: 28px;
-	height: 1px;
-	background: var(--border-bright);
-	flex-shrink: 0;
-}
-.section-eyebrow__text {
-	font-size: 0.6875rem;
-	text-transform: uppercase;
-	letter-spacing: 0.25em;
-	color: var(--accent);
-	font-weight: 700;
-}
 
 /* ─── Ghost section numerals (scroll-parallax) ─────────────────────────── */
 section:has(> .ghost-num) {
@@ -162,21 +124,21 @@ section:has(> .ghost-num) > .container {
 .ghost-num {
 	position: absolute;
 	top: calc(50% - 0.5em);
-	font-family: 'Fraunces', serif;
+	font-family: 'Barlow Condensed', sans-serif;
 	font-size: clamp(10rem, 24vw, 22rem);
 	font-weight: 600;
 	line-height: 1;
 	letter-spacing: -0.02em;
-	color: oklch(50% 0.02 260 / 0.04);
-	-webkit-text-stroke: 1px oklch(45% 0.03 260 / 0.22);
+	color: oklch(50% 0.015 200 / 0.04);
+	-webkit-text-stroke: 1px oklch(45% 0.025 200 / 0.22);
 	pointer-events: none;
 	user-select: none;
 	z-index: 0;
 }
 
 :root.light-theme .ghost-num {
-	color: oklch(50% 0.02 260 / 0.03);
-	-webkit-text-stroke: 1px oklch(60% 0.03 260 / 0.25);
+	color: oklch(50% 0.015 200 / 0.03);
+	-webkit-text-stroke: 1px oklch(60% 0.025 200 / 0.25);
 }
 
 .ghost-num--right { right: -0.06em; }
@@ -217,9 +179,10 @@ section:has(> .ghost-num) > .container {
 }
 
 .navbar-brand {
-	font-family: 'Fraunces', serif;
-	font-weight: 800;
+	font-family: 'Barlow Condensed', sans-serif;
+	font-weight: 700;
 	font-size: 1.5rem;
+	letter-spacing: 0.06em;
 	color: var(--text-main) !important;
 }
 
@@ -248,7 +211,7 @@ section:has(> .ghost-num) > .container {
 }
 
 .typewriter-text {
-	font-family: 'Fraunces', serif;
+	font-family: 'Barlow Condensed', sans-serif;
 	font-weight: 600;
 	font-style: italic;
 	border-right: none;
@@ -273,7 +236,7 @@ section:has(> .ghost-num) > .container {
 .btn-primary:hover {
 	transform: translateY(-4px);
 	background: var(--accent-bright);
-	box-shadow: 0 12px 24px -8px oklch(72% 0.14 260 / 0.5);
+	box-shadow: 0 12px 24px -8px oklch(72% 0.15 200 / 0.5);
 }
 
 .btn-outline-light {

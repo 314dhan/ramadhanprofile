@@ -21,11 +21,6 @@
 	<div class="container">
 		<div class="row mb-5">
 			<div class="col-lg-8">
-				<div class="section-eyebrow">
-					<span class="section-eyebrow__num">05</span>
-					<span class="section-eyebrow__rule"></span>
-					<span class="section-eyebrow__text">Get in Touch</span>
-				</div>
 				<div class="contact-heading-row mt-2">
 					<h2 class="contact-h2 mt-0">{$t('contact_title')}</h2>
 					<span class="available-badge">
@@ -137,7 +132,6 @@
 		flex-direction: column;
 		gap: var(--space-4);
 		transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-		opacity: 0;
 	}
 
 	.contact-item:hover {
@@ -177,7 +171,7 @@
 	}
 
 	.fade-in-up {
-		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	@keyframes fadeInUp {

@@ -106,12 +106,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="section-eyebrow">
-					<span class="section-eyebrow__num">02</span>
-					<span class="section-eyebrow__rule"></span>
-					<span class="section-eyebrow__text">Expertise</span>
-				</div>
-				<h2 class="mt-0">{$t('my_skills_title')}</h2>
+					<h2 class="mt-0">{$t('my_skills_title')}</h2>
 			</div>
 			<div class="col-lg-5 offset-lg-1 d-flex align-items-end">
 				<p class="intro-text">{$t('my_skills_subtitle')}</p>
@@ -189,13 +184,11 @@
 
 	.bands {
 		margin-top: var(--space-8);
-		opacity: 0;
 		transform: translateY(16px);
-		transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+		transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.bands--visible {
-		opacity: 1;
 		transform: translateY(0);
 	}
 
@@ -216,7 +209,7 @@
 	}
 
 	.band-number {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 0.6875rem;
 		font-weight: 600;
 		color: var(--text-dim);
@@ -309,7 +302,7 @@
 	/* Outlined variant */
 	.marquee__item--outline {
 		color: transparent;
-		-webkit-text-stroke: 1.5px oklch(45% 0.02 260 / 0.55);
+		-webkit-text-stroke: 1.5px oklch(45% 0.015 200 / 0.55);
 		transition: -webkit-text-stroke-color 0.25s ease;
 	}
 

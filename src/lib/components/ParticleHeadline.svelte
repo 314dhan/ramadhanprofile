@@ -83,8 +83,8 @@
 			const octx = off.getContext('2d', { willReadFrequently: true });
 			if (!octx) return null;
 
-			const font1 = (px: number) => `600 ${px}px Fraunces, serif`;
-			const font2 = (px: number) => `italic 400 ${px}px Fraunces, serif`;
+			const font1 = (px: number) => `700 ${px}px 'Barlow Condensed', sans-serif`;
+			const font2 = (px: number) => `italic 600 ${px}px 'Barlow Condensed', sans-serif`;
 
 			// shrink canvas font if a line would overflow the box
 			octx.font = font1(fontPx);
@@ -234,8 +234,8 @@
 				const h1 = wrapEl.querySelector('h1');
 				const fontPx = h1 ? parseFloat(getComputedStyle(h1).fontSize) : 80;
 				await Promise.all([
-					document.fonts.load(`600 ${fontPx}px Fraunces`),
-					document.fonts.load(`italic 400 ${fontPx}px Fraunces`)
+					document.fonts.load(`700 ${fontPx}px 'Barlow Condensed'`),
+					document.fonts.load(`italic 600 ${fontPx}px 'Barlow Condensed'`)
 				]).catch(() => {});
 				if (destroyed) return;
 				refreshColors();

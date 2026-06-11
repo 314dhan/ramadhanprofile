@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { t } from '$lib/stores/i18n';
 	import { onMount } from 'svelte';
-	import ParticleField from '$lib/components/ParticleField.svelte';
 	import ParticleHeadline from '$lib/components/ParticleHeadline.svelte';
 	import OrbitalSystem from '$lib/components/OrbitalSystem.svelte';
+	import ParticleField from '$lib/components/ParticleField.svelte';
 
 	let visible = $state(false);
 	let fieldActive = $state(false);
@@ -51,19 +51,20 @@
 
 <section id="intro" class:visible>
 	<!-- Ambient spotlight that subtly follows cursor -->
-	<div 
+	<div
 		class="hero-ambient"
 		style="--mx: {mouseX}px; --my: {mouseY}px;"
 		aria-hidden="true"
 	></div>
 
+	<!-- Dot-matrix grid -->
+	<div class="hero-grid {visible ? '' : 'hero-grid--off'}" aria-hidden="true"></div>
+
+	<!-- Floating particle field -->
+	<ParticleField onstatus={(v) => (fieldActive = v)} />
 
 	<!-- Orbital solar system (3D CSS) -->
 	<OrbitalSystem />
-
-	<!-- 3D particle field (WebGL); dot grid is the fallback when it can't run -->
-	<ParticleField onstatus={(ok) => (fieldActive = ok)} />
-	<div class="hero-grid" class:hero-grid--off={fieldActive} aria-hidden="true"></div>
 
 	<!-- Click ripples -->
 	{#each clicks as click (click.id)}
@@ -106,12 +107,6 @@
 					</a>
 				</div>
 
-				<!-- Floating tech badges -->
-				<div class="tech-badges {visible ? 'fade-in delay-4' : ''}">
-					{#each ['PHP', 'Laravel', 'Flutter', 'Node.js', 'Python', 'Java', 'C++'] as tech, i}
-						<span class="tech-badge" style="animation-delay: {0.6 + i * 0.1}s">{tech}</span>
-					{/each}
-				</div>
 			</div>
 		</div>
 	</div>
@@ -139,27 +134,10 @@
 		z-index: 0;
 		background: radial-gradient(
 			600px circle at var(--mx, 50%) var(--my, 30%),
-			oklch(72% 0.14 260 / 0.06),
+			oklch(72% 0.15 200 / 0.07),
 			transparent 70%
 		);
 		transition: background 0.3s ease;
-	}
-
-
-	/* Subtle dot-grid overlay (fallback when WebGL field is off) */
-	.hero-grid--off {
-		opacity: 0;
-		transition: opacity 0.8s ease;
-	}
-
-	.hero-grid {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		z-index: 0;
-		background-image: radial-gradient(circle, oklch(65% 0.02 260 / 0.15) 1px, transparent 1px);
-		background-size: 40px 40px;
-		mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
 	}
 
 	.hero-content {
@@ -175,8 +153,8 @@
 		width: 100px;
 		height: 100px;
 		border-radius: 50%;
-		border: 2px solid var(--accent);
-		box-shadow: 0 0 20px var(--accent) inset, 0 0 10px var(--accent);
+		border: 1px solid var(--accent);
+		box-shadow: 0 0 16px var(--accent-bright) inset, 0 0 8px var(--accent);
 		pointer-events: none;
 		z-index: 0;
 		animation: ripple-scale 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -204,7 +182,6 @@
 		letter-spacing: 0.15em;
 		color: var(--text-dim);
 		margin-bottom: var(--space-4);
-		opacity: 0;
 	}
 
 	.eyebrow-dot {
@@ -222,10 +199,9 @@
 	}
 
 	.hero-title {
-		font-family: 'Fraunces', serif;
-		font-weight: 600;
+		font-family: 'Barlow Condensed', sans-serif;
+		font-weight: 700;
 		line-height: 0.9;
-		opacity: 0;
 	}
 
 	.italic-accent {
@@ -240,51 +216,13 @@
 		color: var(--text-muted);
 		max-width: 600px;
 		margin: 0 auto;
-		opacity: 0;
 	}
 
 	.cta-group {
-		opacity: 0;
 		display: flex;
 		gap: var(--space-3);
 		justify-content: center;
 		flex-wrap: wrap;
-	}
-
-	/* Tech badge strip */
-	.tech-badges {
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: var(--space-6);
-		opacity: 0;
-	}
-
-	.tech-badge {
-		display: inline-block;
-		padding: 0.3rem 0.9rem;
-		border: 1px solid var(--border);
-		color: var(--text-dim);
-		font-size: 0.7rem;
-		font-weight: 600;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-		cursor: default;
-		opacity: 0;
-		animation: badgeFadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-	}
-
-	.tech-badge:hover {
-		border-color: var(--accent);
-		color: var(--accent);
-		background: oklch(72% 0.14 260 / 0.06);
-	}
-
-	@keyframes badgeFadeIn {
-		from { opacity: 0; transform: translateY(8px); }
-		to { opacity: 1; transform: translateY(0); }
 	}
 
 	.scroll-indicator {
@@ -323,17 +261,16 @@
 	}
 
 	.fade-in-up {
-		animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	.fade-in {
-		animation: fadeIn 1.2s ease forwards;
+		animation: fadeIn 1.2s ease both;
 	}
 
 	.delay-1 { animation-delay: 0.15s; }
 	.delay-2 { animation-delay: 0.3s; }
 	.delay-3 { animation-delay: 0.45s; }
-	.delay-4 { animation-delay: 0.6s; }
 	.delay-5 { animation-delay: 1.2s; }
 
 	@keyframes fadeInUp {
@@ -346,14 +283,23 @@
 		to { opacity: 1; }
 	}
 
-	@media (max-width: 768px) {
-		.tech-badges {
-			justify-content: center;
-		}
-
-		.tech-badge {
-			font-size: 0.625rem;
-			padding: 0.25rem 0.7rem;
-		}
+	/* Dot-matrix grid */
+	.hero-grid {
+		position: absolute;
+		inset: 0;
+		background-image: radial-gradient(circle, oklch(72% 0.15 200 / 0.18) 1px, transparent 1px);
+		background-size: 28px 28px;
+		pointer-events: none;
+		z-index: 0;
+		transition: opacity 1.2s ease;
 	}
+
+	.hero-grid--off {
+		opacity: 0;
+	}
+
+	:global(.light-theme) .hero-grid {
+		background-image: radial-gradient(circle, oklch(52% 0.2 200 / 0.14) 1px, transparent 1px);
+	}
+
 </style>

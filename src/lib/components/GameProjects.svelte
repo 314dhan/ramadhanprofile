@@ -27,12 +27,7 @@
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">
-				<div class="section-eyebrow">
-					<span class="section-eyebrow__num">04</span>
-					<span class="section-eyebrow__rule"></span>
-					<span class="section-eyebrow__text">Roblox Creations</span>
-				</div>
-				<h2 class="mt-0">{$t('my_game_projects_title')}</h2>
+					<h2 class="mt-0">{$t('my_game_projects_title')}</h2>
 			</div>
 			<div class="col-lg-4 text-lg-right">
 				<p class="text-muted">{$t('my_game_projects_subtitle')}</p>
@@ -84,7 +79,6 @@
 		text-decoration: none;
 		color: inherit;
 		display: block;
-		opacity: 0;
 	}
 
 	.game-item:hover {
@@ -128,7 +122,7 @@
 	.image-overlay {
 		position: absolute;
 		inset: 0;
-		background: oklch(12% 0.1 260 / 0.1);
+		background: oklch(12% 0.1 200 / 0.1);
 		opacity: 1;
 		transition: opacity 0.6s ease;
 	}
@@ -142,7 +136,7 @@
 	}
 
 	.game-title {
-		font-family: 'Fraunces', serif;
+		font-family: 'Barlow Condensed', sans-serif;
 		font-size: 1.25rem;
 		margin-bottom: 0.5rem;
 		transition: color 0.3s ease;
@@ -191,7 +185,7 @@
 	}
 
 	.fade-in-up {
-		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 	}
 
 	@keyframes fadeInUp {

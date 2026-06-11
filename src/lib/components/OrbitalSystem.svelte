@@ -193,12 +193,12 @@
 	/* ── Orbit rings ── */
 	.orbit {
 		position: absolute;
-		border: 1px solid oklch(68% 0.04 260 / 0.2);
+		border: 1px solid oklch(68% 0.04 200 / 0.2);
 		border-radius: 50%;
 	}
 
 	:global(.light-theme) .orbit {
-		border-color: oklch(28% 0.04 260 / 0.22);
+		border-color: oklch(28% 0.04 200 / 0.22);
 	}
 
 	/* ── Planet carrier ── */
