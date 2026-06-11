@@ -131,10 +131,12 @@
 
 		function refreshColors() {
 			const root = getComputedStyle(document.documentElement);
-			const accent = resolveCssColor(root.getPropertyValue('--accent').trim());
-			const muted = resolveCssColor(root.getPropertyValue('--text-muted').trim());
-			if (accent) pointColor = accent;
-			if (muted) lineColor = muted;
+			const dotVar = root.getPropertyValue('--particle-dot').trim();
+			const lineVar = root.getPropertyValue('--particle-line').trim();
+			const dot = dotVar ? resolveCssColor(dotVar) : resolveCssColor(root.getPropertyValue('--accent').trim());
+			const line = lineVar ? resolveCssColor(lineVar) : resolveCssColor(root.getPropertyValue('--text-muted').trim());
+			if (dot) pointColor = dot;
+			if (line) lineColor = line;
 		}
 		refreshColors();
 		const unsubTheme = theme.subscribe(() => refreshColors());

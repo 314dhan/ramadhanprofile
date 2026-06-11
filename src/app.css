@@ -13,9 +13,12 @@
 	
 	--accent: oklch(72% 0.14 260); /* Refined Indigo */
 	--accent-bright: oklch(80% 0.12 260);
-	
+
 	--border: oklch(25% 0.02 260 / 0.4);
 	--border-bright: oklch(35% 0.03 260 / 0.6);
+
+	--particle-dot: oklch(72% 0.14 260);
+	--particle-line: oklch(65% 0.02 260);
 
 	/* Spacing Grid (8px base) */
 	--space-1: 0.25rem; /* 4px */
@@ -38,9 +41,12 @@
 	
 	--accent: oklch(60% 0.18 260);
 	--accent-bright: oklch(50% 0.2 260);
-	
+
 	--border: oklch(85% 0.01 260);
 	--border-bright: oklch(75% 0.02 260);
+
+	--particle-dot: oklch(45% 0.22 25);
+	--particle-line: oklch(28% 0.18 25);
 }
 
 /* ─── Custom Cursor (desktop only) ─────────────────────────────────────── */
