@@ -66,7 +66,7 @@
 			<div class="col-lg-5 mb-5 mb-lg-0 {visible ? 'fade-in-left' : ''}">
 				<div class="image-wrapper">
 					<img
-						src="/images/IMG_36.jpg"
+						src="/images/IMG_37.png"
 						alt="About Me"
 						class="img-fluid about-img"
 					/>
