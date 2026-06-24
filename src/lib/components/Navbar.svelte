@@ -93,7 +93,7 @@
 		isLangMenuOpen = false;
 	}
 
-	const flags: Record<string, string> = { en: 'EN', id: 'ID', ja: 'JP' };
+	const flags: Record<string, string> = { en: 'EN', ja: 'JP' };
 </script>
 
 <nav class="navshell" class:hidden={isHidden}>
@@ -144,7 +144,6 @@
 				{#if isLangMenuOpen}
 					<div class="lang-dropdown">
 						<button onclick={() => setLanguage('en')}>English</button>
-						<button onclick={() => setLanguage('id')}>Indonesia</button>
 						<button onclick={() => setLanguage('ja')}>日本語</button>
 					</div>
 				{/if}
