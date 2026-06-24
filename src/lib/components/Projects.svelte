@@ -35,7 +35,7 @@
 </script>
 
 <section id="projects" class:visible>
-	<span class="ghost-num ghost-num--right" aria-hidden="true">03</span>
+	<span class="ghost-num ghost-num--right" aria-hidden="true">04</span>
 	<div class="container">
 		<div class="row mb-5 align-items-end">
 			<div class="col-lg-8">

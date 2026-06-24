@@ -102,7 +102,7 @@
 </script>
 
 <section id="tech-stack" class:visible>
-	<span class="ghost-num ghost-num--left" aria-hidden="true">02</span>
+	<span class="ghost-num ghost-num--left" aria-hidden="true">03</span>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">

@@ -103,7 +103,7 @@
 		</a>
 
 		<ul class="links">
-			{#each ['intro', 'about', 'tech-stack', 'projects', 'contact'] as id}
+			{#each ['intro', 'about', 'experience', 'tech-stack', 'projects', 'contact'] as id}
 				<li>
 					<a
 						class="nav-link"
@@ -168,7 +168,7 @@
 	<!-- Mobile dropdown panel -->
 	{#if isMenuOpen}
 		<div class="mobile-panel">
-			{#each ['intro', 'about', 'tech-stack', 'projects', 'contact'] as id}
+			{#each ['intro', 'about', 'experience', 'tech-stack', 'projects', 'contact'] as id}
 				<a
 					class="mobile-link"
 					class:active={activeSection === id || (id === 'projects' && activeSection === 'game-projects')}

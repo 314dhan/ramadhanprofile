@@ -2,6 +2,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import About from '$lib/components/About.svelte';
+	import Experience from '$lib/components/Experience.svelte';
 	import Skills from '$lib/components/Skills.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import GameProjects from '$lib/components/GameProjects.svelte';
@@ -48,6 +49,7 @@ import { onMount, onDestroy } from 'svelte';
 <main>
 	<Hero />
 	<About />
+	<Experience />
 	<Skills />
 	<Projects />
 	<GameProjects />
