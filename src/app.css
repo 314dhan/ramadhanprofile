@@ -165,44 +165,6 @@ section:has(> .ghost-num) > .container {
 	.ghost-num { font-size: clamp(8rem, 32vw, 12rem); }
 }
 
-/* Refined Navbar */
-.navbar {
-	background: transparent;
-	padding: var(--space-4) 0;
-	transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.navbar.scrolled {
-	background: var(--bg);
-	padding: var(--space-3) 0;
-	border-bottom: 1px solid var(--border);
-}
-
-.navbar-brand {
-	font-family: 'Barlow Condensed', sans-serif;
-	font-weight: 700;
-	font-size: 1.5rem;
-	letter-spacing: 0.06em;
-	color: var(--text-main) !important;
-}
-
-.navbar-brand span {
-	color: var(--accent);
-}
-
-.nav-link {
-	font-weight: 500;
-	font-size: 0.875rem;
-	color: var(--text-muted) !important;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	transition: color 0.3s ease;
-}
-
-.nav-link:hover, .nav-link.active {
-	color: var(--text-main) !important;
-}
-
 /* Impeccable Hero Styling */
 #intro {
 	min-height: 100vh;
